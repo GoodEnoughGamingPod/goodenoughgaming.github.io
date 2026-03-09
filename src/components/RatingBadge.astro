@@ -1,0 +1,37 @@
+---
+interface Props {
+  rating: number;
+}
+
+const { rating } = Astro.props;
+
+const getColor = (r: number) => {
+  if (r >= 8) return "#4ddbff";
+  if (r >= 6) return "#a7a4e0";
+  return "#df53f5";
+};
+
+const color = getColor(rating);
+---
+
+<div class="rating-badge" style={`background-color: ${color};`}>
+  <span>{rating}</span>
+</div>
+
+<style>
+  .rating-badge {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .rating-badge span {
+    color: #13151a;
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+</style>

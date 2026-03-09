@@ -1,0 +1,201 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import RatingBadge from "../../components/RatingBadge.astro";
+
+export async function getStaticPaths() {
+  const reviews = await getCollection("reviews");
+  return reviews.map((review) => ({
+    params: { slug: review.slug },
+    props: review,
+  }));
+}
+
+const review = Astro.props;
+const { Content } = await review.render();
+
+const formattedDate = review.data.pubDate.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<Layout title={`${review.data.title} — Good Enough Gaming`}>
+  <Nav />
+  <body>
+    <main>
+      <a href="/reviews/" class="back-link">&larr; Back to Reviews</a>
+      <article class="review">
+        {review.data.image?.url && (
+          <img
+            src={review.data.image.url}
+            alt={review.data.image.alt || review.data.title}
+            class="hero-image"
+          />
+        )}
+        <div class="review-header">
+          <h1 class="review-title">{review.data.title}</h1>
+          <RatingBadge rating={review.data.rating} />
+        </div>
+        <p class="review-meta">
+          <span class="review-date">{formattedDate}</span> &bull; {review.data.author}
+        </p>
+        <div class="review-info">
+          {review.data.platform && review.data.platform.length > 0 && (
+            <div class="platform-pills">
+              {review.data.platform.map((p: string) => (
+                <span class="pill">{p}</span>
+              ))}
+            </div>
+          )}
+          {review.data.genre && <span class="genre">{review.data.genre}</span>}
+        </div>
+        <div class="prose">
+          <Content />
+        </div>
+      </article>
+    </main>
+    <Footer />
+  </body>
+</Layout>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
+
+  body {
+    min-height: 100vh;
+    background: #13151a;
+  }
+  main {
+    margin: 0 auto;
+    padding: 1rem;
+    max-width: 50rem;
+    color: white;
+    margin-top: 8rem;
+  }
+  .back-link {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    color: #4ddbff;
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+  .back-link:hover {
+    text-decoration: underline;
+  }
+  .review {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .hero-image {
+    width: 100%;
+    border-radius: 8px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .review-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #4ddbff;
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: 0.03em;
+  }
+  .review-meta {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    opacity: 0.7;
+    margin: 0;
+  }
+  .review-date {
+    color: #a7a4e0;
+  }
+  .review-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .platform-pills {
+    display: flex;
+    gap: 0.35rem;
+  }
+  .pill {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.1rem 0.55rem;
+    background-color: rgba(77, 219, 255, 0.15);
+    color: #4ddbff;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .genre {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.1rem 0.55rem;
+    background-color: rgba(167, 164, 224, 0.2);
+    color: #a7a4e0;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .prose {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 500;
+    line-height: 1.8;
+    font-size: 1.15rem;
+  }
+  .prose :global(h2) {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    color: #4ddbff;
+    font-size: 1.7rem;
+    margin-top: 2rem;
+    letter-spacing: 0.04em;
+  }
+  .prose :global(h3) {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    color: #a7a4e0;
+    font-size: 1.4rem;
+    margin-top: 1.5rem;
+    letter-spacing: 0.03em;
+  }
+  .prose :global(a) {
+    color: #4ddbff;
+  }
+  .prose :global(ul),
+  .prose :global(ol) {
+    padding-left: 1.5rem;
+  }
+  .prose :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  .prose :global(strong) {
+    font-weight: 700;
+    color: #4ddbff;
+  }
+  @media (min-width: 64rem) {
+    main {
+      margin-top: 10rem;
+    }
+  }
+</style>

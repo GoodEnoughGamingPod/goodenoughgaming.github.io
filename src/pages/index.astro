@@ -1,87 +1,186 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import Nav from '../components/Nav.astro';
-import MainContent from '../components/MainContent.astro';
 import Footer from '../components/Footer.astro';
 import SubscribeBar from '../components/SubscribeBar.astro';
+import BlogCard from '../components/BlogCard.astro';
+import SubscribeWidget from '../components/SubscribeWidget.astro';
+
+const allPosts = (await getCollection("blog")).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const latestPosts = allPosts.slice(0, 3);
 ---
 
 <Layout title="Good Enough Gaming">	
 	<Nav />
 	<body >
-		<div class="banner-section">		
-		 	<div class="absolute bottom-0 left-0 right-0 top-0 h-lvh w-full bg-[url('../GegBannerNoText.png')] bg-cover bg-[50%] banner" /> 
-				<img class="title" src="../goodenoughtitle.png" />
-				<span class="podcast-line text-center">PODCAST</span>	
-			<!--<div class="title text-center z-10">
-				<h2 class="home-line">Home of the</h2>
-				<h1> <span class="good-line m-0 p-0">Good Enough Gaming</span></p>
-				<h1 class="podcast-line m-0 p-0">Podcast</h1>			
-			</div>-->
-			<div class="banner-container">			
-				<div class="banner-content-left border-solid relative grid grid-rows-2">
-					<p class="about-text row-span-1">Just 4 dudes who love to talk about all things video games. New episodes every week.</p>
-					<img class="group-image absolute bottom-0 object-contain p-5 row-span-2" src="groupPhoto.PNG" />
-				</div>
-				<div class="banner-content-right border-solid right-content">
-					<img src="GameconBanner.png" />
-				</div>
+		<div class="banner-section">
+		 	<div class="absolute bottom-0 left-0 right-0 top-0 h-lvh w-full bg-[url('/GegBannerNoText.png')] bg-cover bg-[50%] banner" />
+			<div class="title">
+				<span class="title-good">GOOD ENOUGH</span>
+				<span class="title-gaming">GAMING</span>
+				<span class="title-podcast">PODCAST</span>
 			</div>
-			<div class="subscribe ">		
-				<div class="icon-container flex">		
-					<a href="https://www.youtube.com/@GoodEnoughGamingPod"><img src="youtube-square.svg" /></a>
-					<a href="https://podcasts.apple.com/ca/podcast/good-enough-gaming-pod/id1553128355"><img src="apple-podcasts-icon.svg" /></a>
-					<a href="https://open.spotify.com/show/3x1nEjDu2Y0ce19FGTXPyo"><img src="spotify-square-color-icon.svg" /></a>
-					<span class="rise-shake text-white">Subscribe!</span>
-				</div>
+			<p class="tagline">Just 4 dudes who love to talk about all things video games. New episodes every week.</p>
+			<div class="alien-container" aria-hidden="true">
+				<span class="alien"></span>
 			</div>
-		</div>	
-	
-				
-
-	<main>		
-		<p class="instructions text-center">
-			Latest Episodes
-		</p>
-		<div class="youtube-wrapper grid lg:grid-cols-3 sm:grid-cols-1">
-			<div class="youtube-vid align-middle">
-				<iframe class="youtube-iframe" src="https://www.youtube.com/embed?listType=playlist&list=UULFaKEZQ3_U67UWC9O2J0FsgQ"></iframe>
+			<div class="squid-container" aria-hidden="true">
+				<span class="squid"></span>
 			</div>
-			<div class="youtube-vid">
-				<iframe class="youtube-iframe" src="https://www.youtube.com/embed?listType=playlist&list=UULFaKEZQ3_U67UWC9O2J0FsgQ&index=2"></iframe>
+			<div class="octopus-container" aria-hidden="true">
+				<span class="octopus"></span>
 			</div>
-			<div class="youtube-vid">
-				<iframe class="youtube-iframe" src="https://www.youtube.com/embed?listType=playlist&list=UULFaKEZQ3_U67UWC9O2J0FsgQ&index=3"></iframe>
+			<div class="crab-teal-container" aria-hidden="true">
+				<span class="crab-teal"></span>
+			</div>
+			<div class="squid-yellow-container" aria-hidden="true">
+				<span class="squid-yellow"></span>
+			</div>
+			<div class="octopus-orange-container" aria-hidden="true">
+				<span class="octopus-orange"></span>
+			</div>
+			<div class="listen-cards">
+				<a href="https://open.spotify.com/show/3x1nEjDu2Y0ce19FGTXPyo" class="listen-badge" target="_blank" rel="noopener">
+					<img src="/spotify_button.png" alt="Listen on Spotify" />
+				</a>
+				<a href="https://podcasts.apple.com/ca/podcast/good-enough-gaming-pod/id1553128355" class="listen-badge" target="_blank" rel="noopener">
+					<img src="/apple_button.png" alt="Listen on Apple Podcasts" />
+				</a>
+				<a href="https://www.youtube.com/@GoodEnoughGamingPod" class="listen-badge" target="_blank" rel="noopener">
+					<img src="/youtube_button.png" alt="Watch on YouTube" />
+				</a>
 			</div>
 		</div>
-
-		<p class="instructions text-center">
-			Latest News
-		</p>
+		<div class="page-lower">
+	<div class="synthwave-bg" aria-hidden="true">
+		<svg viewBox="0 0 1440 1200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+			<!-- Perspective horizon grid — horizontal lines, purple -->
+			<line x1="0" y1="280" x2="1440" y2="280" stroke="#a855f7" stroke-width="1.2" opacity="0.22"/>
+			<line x1="0" y1="370" x2="1440" y2="370" stroke="#a855f7" stroke-width="1.1" opacity="0.20"/>
+			<line x1="0" y1="470" x2="1440" y2="470" stroke="#a855f7" stroke-width="1.0" opacity="0.19"/>
+			<line x1="0" y1="585" x2="1440" y2="585" stroke="#a855f7" stroke-width="1.0" opacity="0.18"/>
+			<line x1="0" y1="720" x2="1440" y2="720" stroke="#a855f7" stroke-width="0.9" opacity="0.16"/>
+			<line x1="0" y1="880" x2="1440" y2="880" stroke="#a855f7" stroke-width="0.9" opacity="0.14"/>
+			<line x1="0" y1="1070" x2="1440" y2="1070" stroke="#a855f7" stroke-width="0.8" opacity="0.12"/>
+			<!-- Perspective rays from vanishing point (720, 280) — cyan -->
+			<line x1="720" y1="280" x2="0"    y2="1200" stroke="#4ddbff" stroke-width="0.9" opacity="0.13"/>
+			<line x1="720" y1="280" x2="240"  y2="1200" stroke="#4ddbff" stroke-width="0.9" opacity="0.13"/>
+			<line x1="720" y1="280" x2="480"  y2="1200" stroke="#4ddbff" stroke-width="0.9" opacity="0.13"/>
+			<line x1="720" y1="280" x2="720"  y2="1200" stroke="#4ddbff" stroke-width="0.9" opacity="0.13"/>
+			<line x1="720" y1="280" x2="960"  y2="1200" stroke="#4ddbff" stroke-width="0.9" opacity="0.13"/>
+			<line x1="720" y1="280" x2="1200" y2="1200" stroke="#4ddbff" stroke-width="0.9" opacity="0.13"/>
+			<line x1="720" y1="280" x2="1440" y2="1200" stroke="#4ddbff" stroke-width="0.9" opacity="0.13"/>
+			<line x1="720" y1="280" x2="0"    y2="750"  stroke="#4ddbff" stroke-width="0.7" opacity="0.10"/>
+			<line x1="720" y1="280" x2="1440" y2="750"  stroke="#4ddbff" stroke-width="0.7" opacity="0.10"/>
+			<line x1="720" y1="280" x2="0"    y2="530"  stroke="#4ddbff" stroke-width="0.7" opacity="0.10"/>
+			<line x1="720" y1="280" x2="1440" y2="530"  stroke="#4ddbff" stroke-width="0.7" opacity="0.10"/>
+			<!-- Major diagonal accents -->
+			<line x1="0"    y1="80"   x2="1200" y2="1200" stroke="#4ddbff" stroke-width="1.5" opacity="0.18"/>
+			<line x1="1440" y1="40"   x2="120"  y2="1200" stroke="#ff6ec7" stroke-width="1.5" opacity="0.17"/>
+			<line x1="0"    y1="580"  x2="1440" y2="920"  stroke="#00d4aa" stroke-width="1.2" opacity="0.16"/>
+			<line x1="1440" y1="350"  x2="0"    y2="700"  stroke="#ffd93d" stroke-width="1.0" opacity="0.14"/>
+			<!-- Large diamond outline — pink -->
+			<polygon points="720,30 1160,600 720,1170 280,600" fill="none" stroke="#ff6ec7" stroke-width="1.2" opacity="0.14"/>
+			<!-- Corner triangles -->
+			<polygon points="0,0 520,0 0,480"            fill="none" stroke="#a855f7" stroke-width="1.1" opacity="0.14"/>
+			<polygon points="1440,550 1440,1200 820,1200" fill="none" stroke="#4ddbff" stroke-width="1.1" opacity="0.14"/>
+			<!-- Scattered short accent lines -->
+			<line x1="60"   y1="880" x2="340" y2="680" stroke="#ffd93d" stroke-width="1.0" opacity="0.18"/>
+			<line x1="1080" y1="180" x2="1400" y2="420" stroke="#00d4aa" stroke-width="1.0" opacity="0.16"/>
+			<line x1="180"  y1="360" x2="80"   y2="680" stroke="#ff6ec7" stroke-width="0.9" opacity="0.16"/>
+		</svg>
+	</div>
+	<div class="images-section">
+			<div class="banner-content-right">
+				<h2 class="section-heading">Latest Episodes</h2>
+				<div class="youtube-wrapper grid lg:grid-cols-3 sm:grid-cols-1">
+					<div class="youtube-vid align-middle">
+						<iframe class="youtube-iframe" src="https://www.youtube.com/embed?listType=playlist&list=UULFaKEZQ3_U67UWC9O2J0FsgQ"></iframe>
+					</div>
+					<div class="youtube-vid">
+						<iframe class="youtube-iframe" src="https://www.youtube.com/embed?listType=playlist&list=UULFaKEZQ3_U67UWC9O2J0FsgQ&index=2"></iframe>
+					</div>
+					<div class="youtube-vid">
+						<iframe class="youtube-iframe" src="https://www.youtube.com/embed?listType=playlist&list=UULFaKEZQ3_U67UWC9O2J0FsgQ&index=3"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+	<main>
+		<h2 class="section-heading section-heading--news">Latest News</h2>
 		<div class="news-wrapper grid lg:grid-cols-3 sm:grid-cols-1">
-			<div class="news-card align-middle">
-				
-			</div>
-			<div class="news-card">
-				
-			</div>
-			<div class="news-card">
-				
-			</div>
+			{latestPosts.map((post) => (
+				<BlogCard
+					title={post.data.title}
+					description={post.data.description}
+					pubDate={post.data.pubDate}
+					author={post.data.author}
+					image={post.data.image}
+					tags={post.data.tags}
+					slug={post.slug}
+				/>
+			))}
+		</div>
+		<div class="view-all">
+			<a href="/blog/" class="view-all-link">View All Posts &rarr;</a>
 		</div>
 	</main>
+
+	<div class="community-links">
+		<!-- Discord pair: HTML order [button][alien] → mobile=row(btn left, alien right), desktop=row-reverse(alien left, btn right) -->
+		<div class="community-pair">
+			<a href="https://discord.gg/" class="community-btn" target="_blank" rel="noopener">
+				<img src="/discord.webp" alt="Join our Discord" />
+			</a>
+			<div class="comm-alien-wrap" aria-hidden="true">
+				<span class="comm-alien comm-alien--pink"></span>
+			</div>
+		</div>
+		<!-- Patreon pair: HTML order [alien][button] → mobile=row(alien left, btn right), desktop=row-reverse(btn left, alien right) -->
+		<div class="community-pair">
+			<div class="comm-alien-wrap" aria-hidden="true">
+				<span class="comm-alien comm-alien--orange"></span>
+			</div>
+			<a href="https://www.patreon.com/" class="community-btn" target="_blank" rel="noopener">
+				<img src="/patreon.webp" alt="Support on Patreon" />
+			</a>
+		</div>
+	</div>
+
+	<div class="hosts-section">
+		<h2 class="section-heading section-heading--hosts">Meet the Hosts</h2>
+		<img class="group-image-large" src="groupPhoto.PNG" alt="Good Enough Gaming crew" />
+		<div class="hosts-grid">
+			<div class="host-tile host-tile--cyan"><span class="host-name">Kyle</span></div>
+			<div class="host-tile host-tile--pink"><span class="host-name">Jordan</span></div>
+			<div class="host-tile host-tile--purple"><span class="host-name">Darrell</span></div>
+			<div class="host-tile host-tile--teal"><span class="host-name">Trevor</span></div>
+		</div>
+		<a href="/about/" class="learn-more-btn">Learn More</a>
+	</div>
+
+	<SubscribeWidget />
+
+	</div> <!-- end .page-lower -->
 
 	<Footer />
 	</body>
 </Layout>
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Monoton&family=Raleway:ital,wght@1,300&display=swap');
+
 	body {
 		position: relative;
 		min-height: 100%;
-		width: 100vw;
+		width: 100%;
 		background-attachment: fixed;
+		margin: 0;
+		padding: 0;
 	}
 	main {
 		margin: auto;
@@ -90,67 +189,111 @@ import SubscribeBar from '../components/SubscribeBar.astro';
 		color: white;
 		font-size: 20px;
 		line-height: 1.6;
-		margin-top: 8rem;;
+		margin-top: 2rem;
 	}
 	
 	.banner-section {
 		position: relative;
-		//display: grid;
 		height: 100vh;
-  		//grid-template: 1fr / 1fr;
-  		//place-items: center;
+		overflow: hidden;
 	}
-	.banner-container {
-		display: flex;
-  		flex-direction: row;
-		justify-content: space-between;
-		gap: 2rem;
-        //margin: auto;
-		//padding: 1rem;
-		max-width: 90rem;		
-		color: white;
-		font-size: 20px;
-		line-height: 1.6;
-        //position: absolute;
-        z-index:10;
-		//bottom: 55px;	
-    }
-    .main-card {       
-        width: auto;
-		height: auto;
-        background: white;
-        color: blue;
-		margin: 2rem;
-		
-    }
 	.group-image {
-		width: calc(100% - 2.5rem); 
-		left: 0;
-		right: 0;
-		margin-left: auto;
-		margin-right: auto;
+		width: 100%;
+		height: auto;
+		object-fit: contain;
 	}
 	
 	.title {
-		//text-shadow: 0 0 10px #cd66dd, 0 0 20px #4883cf, 0 0 42px rgb(206, 63, 213), 0 0 82px rgb(54, 161, 199),0 0 92px rgb(53, 97, 210);
-		//margin-top: 10rem;
-		color: rgb(48, 193, 246);
 		position: relative;
-	}
-	.title p {
-		font-size: 3rem;
-	}	
-	.title h1 {
-		font-size: 3rem;
-		font-weight: 700;
-		line-height: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 12rem;
+		z-index: 1;
+		font-family: 'Press Start 2P', 'Courier New', monospace;
 	}
-	.title h2 {
-		font-size: 2rem;
-		font-weight: 700;
-		line-height: 1;
-		text-align: center;
+	.title-good {
+		display: block;
+		font-size: 3.1rem;
+		color: #4ddbff;
+		-webkit-text-stroke: 2px #000;
+		paint-order: stroke fill;
+		text-shadow:
+			/* 3D extrusion — 8 layers going down-right */
+			1px 1px 0 #003344,
+			2px 2px 0 #002a38,
+			3px 3px 0 #00222e,
+			4px 4px 0 #001a24,
+			5px 5px 0 #00121a,
+			6px 6px 0 #000a10,
+			7px 7px 0 #000508,
+			8px 8px 6px rgba(0,0,0,0.8),
+			/* outer glow */
+			0 0 20px #4ddbff,
+			0 0 50px #4ddbff,
+			0 0 90px #df53f5;
+		line-height: 1.5;
+		letter-spacing: 0.05em;
+	}
+	.title-gaming {
+		display: block;
+		font-size: 5.9rem;
+		color: #df53f5;
+		-webkit-text-stroke: 2px #000;
+		paint-order: stroke fill;
+		text-shadow:
+			/* 3D extrusion — 8 layers going down-right */
+			1px 1px 0 #3a0044,
+			2px 2px 0 #300038,
+			3px 3px 0 #26002c,
+			4px 4px 0 #1c0020,
+			5px 5px 0 #120014,
+			6px 6px 0 #08000a,
+			7px 7px 0 #040006,
+			8px 8px 6px rgba(0,0,0,0.8),
+			/* outer glow */
+			0 0 20px #df53f5,
+			0 0 50px #df53f5,
+			0 0 90px #4ddbff;
+		line-height: 1.3;
+		letter-spacing: 0.05em;
+	}
+	.title-podcast {
+		display: inline-block;
+		font-size: 3.5rem;
+		font-family: 'Monoton', cursive;
+		color: #ff6ec7;
+		transform: rotate(-5deg);
+		margin-top: 1.8rem;
+		letter-spacing: 0.15em;
+		animation: neon-flicker 5s infinite;
+	}
+
+	@keyframes neon-flicker {
+		0%, 17%, 19%, 21%, 55%, 57%, 59%, 100% {
+			opacity: 1;
+			text-shadow:
+				0 0 5px #fff,
+				0 0 10px #fff,
+				0 0 20px #ff6ec7,
+				0 0 40px #ff6ec7,
+				0 0 70px #df53f5,
+				0 0 100px #df53f5;
+		}
+		18%, 56% {
+			opacity: 0.2;
+			text-shadow: none;
+		}
+		20%, 58% {
+			opacity: 0.8;
+			text-shadow:
+				0 0 5px #fff,
+				0 0 15px #ff6ec7,
+				0 0 30px #ff6ec7;
+		}
 	}
 	.astro-a {
 		position: absolute;
@@ -160,47 +303,6 @@ import SubscribeBar from '../components/SubscribeBar.astro';
 		width: 220px;
 		height: auto;
 		z-index: -1;
-	}
-	.home-line {
-		color: #3447d9; 
-		text-shadow:
-		0 0 7px #fff,
-		0 0 10px #fff,
-		0 0 21px #fff,
-		0 0 42px #fff,
-		0 0 82px #fff,
-		0 0 92px #fff,
-		0 0 102px #fff,
-		0 0 151px #fff;
-		
-	}
-	.good-line {		
-		color: #4ddbff;
-  		text-shadow:
-		0 0 7px #df53f5,
-		0 0 10px #4ddbff,
-		0 0 21px #4ddbff,
-		0 0 42px #df53f5,
-		0 0 82px #4ddbff,
-		0 0 92px #df53f5,
-		0 0 102px #4ddbff,
-		0 0 151px #df53f5;
-		
-	}
-	.podcast-line {
-		color: #9425cf;
-		text-shadow:
-		0 0 7px #fff,
-		0 0 10px #fff,
-		0 0 21px #fff,
-		0 0 42px #fff,
-		0 0 82px #fff,
-		0 0 92px #fff,
-		0 0 102px #fff,
-		0 0 151px #fff;
-		position: absolute;
-		left: 0;
-		right: 0;
 	}
 	.instructions {
 		margin-bottom: 2rem;
@@ -228,28 +330,341 @@ import SubscribeBar from '../components/SubscribeBar.astro';
 		padding: 0;
 	}
 
-	.subscribe {
-		//transform: translateY(40px);
-		background-color: black;
-       
-        width: 88rem;
-        height: 10%;
-        
-        z-index: 20;
-        position: absolute; 
+	.listen-cards {
+		position: absolute;
+		bottom: 2rem;
+		left: 0;
+		right: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1.5rem;
+		padding: 0 1rem;
+		flex-wrap: wrap;
+		z-index: 2;
 	}
 
-	.icon-container {  
-        justify-content: center;
-        gap: 2rem;
-    }
+	.tagline {
+		position: relative;
+		z-index: 1;
+		text-align: center;
+		font-family: 'Raleway', sans-serif;
+		font-style: italic;
+		font-weight: 300;
+		font-size: 0.95rem;
+		color: rgba(255, 255, 255, 0.82);
+		letter-spacing: 0.04em;
+		margin-top: 1.5rem;
+		padding: 0 2rem;
+	}
+
+	.page-lower {
+		position: relative;
+	}
+	.synthwave-bg {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		pointer-events: none;
+		overflow: hidden;
+	}
+	.synthwave-bg svg {
+		width: 100%;
+		height: 100%;
+	}
+	/* Lift content sections above SVG layer */
+	.images-section,
+	main,
+	.hosts-section {
+		position: relative;
+		z-index: 1;
+	}
+
+	.images-section {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: flex-start;
+		gap: 2rem;
+		padding: 3rem 2rem;
+	}
+	.group-photo-section {
+		background: #13151a;
+		display: flex;
+		justify-content: center;
+		padding: 2rem;
+	}
+	.group-photo-section .group-image {
+		max-width: 600px;
+		width: 100%;
+		height: auto;
+		border-radius: 8px;
+	}
+
+	.listen-badge img {
+		height: 5rem;
+		width: auto;
+		display: block;
+		transition: transform 0.2s ease, opacity 0.2s ease;
+	}
+
+	.listen-badge:hover img {
+		transform: translateY(-3px);
+		opacity: 0.85;
+	}
+
+	.section-heading {
+		font-family: 'Press Start 2P', 'Courier New', monospace;
+		font-size: 1.8rem;
+		color: #ff8c00;
+		text-align: center;
+		margin-top: 0;
+		margin-bottom: 2.5rem;
+		text-shadow:
+			1px 1px 0 #7a3800,
+			2px 2px 0 #6a2e00,
+			3px 3px 0 #5a2400,
+			4px 4px 0 #4a1a00,
+			5px 5px 8px rgba(0,0,0,0.7),
+			0 0 20px #ff8c00,
+			0 0 50px #ff6500,
+			0 0 90px #ff4500;
+	}
+	.section-heading--news {
+		color: #ff6ec7;
+		text-shadow:
+			1px 1px 0 #7a0044,
+			2px 2px 0 #6a0038,
+			3px 3px 0 #5a002c,
+			4px 4px 0 #4a0020,
+			5px 5px 8px rgba(0,0,0,0.7),
+			0 0 20px #ff6ec7,
+			0 0 50px #df53f5,
+			0 0 90px #a855f7;
+	}
+	.section-heading--hosts {
+		color: #00d4aa;
+		text-shadow:
+			1px 1px 0 #003328,
+			2px 2px 0 #002820,
+			3px 3px 0 #001d18,
+			4px 4px 0 #001210,
+			5px 5px 8px rgba(0,0,0,0.7),
+			0 0 20px #00d4aa,
+			0 0 50px #00ffcc,
+			0 0 90px #00bfaa;
+	}
+
+	/* ---- Community links (desktop) ---- */
+	.community-links {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 4rem;
+		padding: 4rem 1rem;
+		position: relative;
+		z-index: 1;
+	}
+	.community-pair {
+		display: flex;
+		flex-direction: row-reverse; /* desktop: flips each pair so alien is on outer edge */
+		align-items: center;
+		gap: 1.5rem;
+	}
+	.community-btn img {
+		height: 5rem;
+		width: auto;
+		display: block;
+		transition: transform 0.2s ease, opacity 0.2s ease;
+	}
+	.community-btn:hover img {
+		transform: translateY(-3px);
+		opacity: 0.85;
+	}
+	/* Community alien containers */
+	.comm-alien-wrap {
+		width: 110px;
+		height: 80px;
+		flex-shrink: 0;
+		position: relative;
+	}
+	.comm-alien {
+		display: block;
+		width: 10px;
+		height: 10px;
+		background: transparent;
+	}
+	.comm-alien--pink {
+		animation: comm-pink-walk 0.8s steps(1) infinite;
+		filter: drop-shadow(0 0 6px #ff6ec7);
+	}
+	.comm-alien--orange {
+		animation: comm-orange-walk 0.8s steps(1) infinite;
+		filter: drop-shadow(0 0 6px #ff8c42);
+	}
+
+	/* Pink invader (crab shape, #ff6ec7) */
+	@keyframes comm-pink-walk {
+		0%, 100% { box-shadow:
+			20px 0 0 0 #ff6ec7, 80px 0 0 0 #ff6ec7,
+			30px 10px 0 0 #ff6ec7, 70px 10px 0 0 #ff6ec7,
+			20px 20px 0 0 #ff6ec7, 30px 20px 0 0 #ff6ec7, 40px 20px 0 0 #ff6ec7, 50px 20px 0 0 #ff6ec7, 60px 20px 0 0 #ff6ec7, 70px 20px 0 0 #ff6ec7, 80px 20px 0 0 #ff6ec7,
+			10px 30px 0 0 #ff6ec7, 20px 30px 0 0 #ff6ec7, 40px 30px 0 0 #ff6ec7, 50px 30px 0 0 #ff6ec7, 60px 30px 0 0 #ff6ec7, 80px 30px 0 0 #ff6ec7, 90px 30px 0 0 #ff6ec7,
+			0 40px 0 0 #ff6ec7, 10px 40px 0 0 #ff6ec7, 20px 40px 0 0 #ff6ec7, 30px 40px 0 0 #ff6ec7, 40px 40px 0 0 #ff6ec7, 50px 40px 0 0 #ff6ec7, 60px 40px 0 0 #ff6ec7, 70px 40px 0 0 #ff6ec7, 80px 40px 0 0 #ff6ec7, 90px 40px 0 0 #ff6ec7, 100px 40px 0 0 #ff6ec7,
+			0 50px 0 0 #ff6ec7, 20px 50px 0 0 #ff6ec7, 30px 50px 0 0 #ff6ec7, 40px 50px 0 0 #ff6ec7, 50px 50px 0 0 #ff6ec7, 60px 50px 0 0 #ff6ec7, 70px 50px 0 0 #ff6ec7, 80px 50px 0 0 #ff6ec7, 100px 50px 0 0 #ff6ec7,
+			0 60px 0 0 #ff6ec7, 20px 60px 0 0 #ff6ec7, 80px 60px 0 0 #ff6ec7, 100px 60px 0 0 #ff6ec7,
+			30px 70px 0 0 #ff6ec7, 40px 70px 0 0 #ff6ec7, 60px 70px 0 0 #ff6ec7, 70px 70px 0 0 #ff6ec7;
+		}
+		50% { box-shadow:
+			20px 0 0 0 #ff6ec7, 80px 0 0 0 #ff6ec7,
+			0 10px 0 0 #ff6ec7, 30px 10px 0 0 #ff6ec7, 70px 10px 0 0 #ff6ec7, 100px 10px 0 0 #ff6ec7,
+			0 20px 0 0 #ff6ec7, 20px 20px 0 0 #ff6ec7, 30px 20px 0 0 #ff6ec7, 40px 20px 0 0 #ff6ec7, 50px 20px 0 0 #ff6ec7, 60px 20px 0 0 #ff6ec7, 70px 20px 0 0 #ff6ec7, 80px 20px 0 0 #ff6ec7, 100px 20px 0 0 #ff6ec7,
+			0 30px 0 0 #ff6ec7, 10px 30px 0 0 #ff6ec7, 20px 30px 0 0 #ff6ec7, 40px 30px 0 0 #ff6ec7, 50px 30px 0 0 #ff6ec7, 60px 30px 0 0 #ff6ec7, 80px 30px 0 0 #ff6ec7, 90px 30px 0 0 #ff6ec7, 100px 30px 0 0 #ff6ec7,
+			0 40px 0 0 #ff6ec7, 10px 40px 0 0 #ff6ec7, 20px 40px 0 0 #ff6ec7, 30px 40px 0 0 #ff6ec7, 40px 40px 0 0 #ff6ec7, 50px 40px 0 0 #ff6ec7, 60px 40px 0 0 #ff6ec7, 70px 40px 0 0 #ff6ec7, 80px 40px 0 0 #ff6ec7, 90px 40px 0 0 #ff6ec7, 100px 40px 0 0 #ff6ec7,
+			10px 50px 0 0 #ff6ec7, 20px 50px 0 0 #ff6ec7, 30px 50px 0 0 #ff6ec7, 40px 50px 0 0 #ff6ec7, 50px 50px 0 0 #ff6ec7, 60px 50px 0 0 #ff6ec7, 70px 50px 0 0 #ff6ec7, 80px 50px 0 0 #ff6ec7, 90px 50px 0 0 #ff6ec7,
+			20px 60px 0 0 #ff6ec7, 80px 60px 0 0 #ff6ec7,
+			10px 70px 0 0 #ff6ec7, 90px 70px 0 0 #ff6ec7;
+		}
+	}
+
+	/* Orange squid (#ff8c42) */
+	@keyframes comm-orange-walk {
+		0%, 100% { box-shadow:
+			20px 0 0 0 #ff8c42, 30px 0 0 0 #ff8c42,
+			10px 10px 0 0 #ff8c42, 20px 10px 0 0 #ff8c42, 30px 10px 0 0 #ff8c42, 40px 10px 0 0 #ff8c42,
+			0 20px 0 0 #ff8c42, 10px 20px 0 0 #ff8c42, 20px 20px 0 0 #ff8c42, 30px 20px 0 0 #ff8c42, 40px 20px 0 0 #ff8c42, 50px 20px 0 0 #ff8c42,
+			0 30px 0 0 #ff8c42, 20px 30px 0 0 #ff8c42, 30px 30px 0 0 #ff8c42, 50px 30px 0 0 #ff8c42,
+			0 40px 0 0 #ff8c42, 10px 40px 0 0 #ff8c42, 20px 40px 0 0 #ff8c42, 30px 40px 0 0 #ff8c42, 40px 40px 0 0 #ff8c42, 50px 40px 0 0 #ff8c42,
+			10px 50px 0 0 #ff8c42, 40px 50px 0 0 #ff8c42,
+			0 60px 0 0 #ff8c42, 50px 60px 0 0 #ff8c42,
+			10px 70px 0 0 #ff8c42, 40px 70px 0 0 #ff8c42;
+		}
+		50% { box-shadow:
+			20px 0 0 0 #ff8c42, 30px 0 0 0 #ff8c42,
+			10px 10px 0 0 #ff8c42, 20px 10px 0 0 #ff8c42, 30px 10px 0 0 #ff8c42, 40px 10px 0 0 #ff8c42,
+			0 20px 0 0 #ff8c42, 10px 20px 0 0 #ff8c42, 20px 20px 0 0 #ff8c42, 30px 20px 0 0 #ff8c42, 40px 20px 0 0 #ff8c42, 50px 20px 0 0 #ff8c42,
+			0 30px 0 0 #ff8c42, 20px 30px 0 0 #ff8c42, 30px 30px 0 0 #ff8c42, 50px 30px 0 0 #ff8c42,
+			0 40px 0 0 #ff8c42, 10px 40px 0 0 #ff8c42, 20px 40px 0 0 #ff8c42, 30px 40px 0 0 #ff8c42, 40px 40px 0 0 #ff8c42, 50px 40px 0 0 #ff8c42,
+			0 50px 0 0 #ff8c42, 50px 50px 0 0 #ff8c42,
+			10px 60px 0 0 #ff8c42, 40px 60px 0 0 #ff8c42,
+			0 70px 0 0 #ff8c42, 50px 70px 0 0 #ff8c42;
+		}
+	}
+
+	/* ---- Community links (mobile) ---- */
+	@media only screen and (max-width: 63.9375rem) {
+		.community-links {
+			flex-direction: column;
+			align-items: stretch;
+			gap: 0.75rem;
+			padding: 3rem 2rem;
+		}
+		.community-pair {
+			flex-direction: row; /* mobile: restore natural HTML order */
+			justify-content: space-between;
+			align-items: center;
+		}
+		.community-btn img {
+			height: 3rem;
+		}
+		.comm-alien-wrap {
+			transform: scale(0.6);
+			transform-origin: center;
+		}
+	}
+
+	.hosts-section {
+		padding: 3rem 2rem 4rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.group-image-large {
+		width: 100%;
+		max-width: 900px;
+		height: auto;
+		border-radius: 10px;
+		margin-bottom: 3rem;
+	}
+	.hosts-grid {
+		display: flex;
+		flex-direction: row;
+		gap: 1.5rem;
+		justify-content: center;
+		flex-wrap: wrap;
+		width: 100%;
+		max-width: 900px;
+	}
+	.host-tile {
+		flex: 1;
+		min-width: 140px;
+		max-width: 200px;
+		padding: 2.5rem 1rem;
+		border-radius: 10px;
+		text-align: center;
+		font-family: 'Press Start 2P', 'Courier New', monospace;
+		position: relative;
+		background: linear-gradient(160deg, #0d0d1a 0%, #12101f 100%);
+	}
+	.host-name {
+		font-size: 0.85rem;
+		letter-spacing: 0.08em;
+		position: relative;
+		z-index: 1;
+	}
+	.host-tile--cyan {
+		border: 2px solid #4ddbff;
+		box-shadow: 0 0 12px #4ddbff, 0 0 30px rgba(77,219,255,0.3), inset 0 0 20px rgba(77,219,255,0.08);
+	}
+	.host-tile--cyan .host-name { color: #4ddbff; text-shadow: 0 0 10px #4ddbff, 0 0 25px #4ddbff; }
+
+	.host-tile--pink {
+		border: 2px solid #ff6ec7;
+		box-shadow: 0 0 12px #ff6ec7, 0 0 30px rgba(255,110,199,0.3), inset 0 0 20px rgba(255,110,199,0.08);
+	}
+	.host-tile--pink .host-name { color: #ff6ec7; text-shadow: 0 0 10px #ff6ec7, 0 0 25px #df53f5; }
+
+	.host-tile--purple {
+		border: 2px solid #a855f7;
+		box-shadow: 0 0 12px #a855f7, 0 0 30px rgba(168,85,247,0.3), inset 0 0 20px rgba(168,85,247,0.08);
+	}
+	.host-tile--purple .host-name { color: #c084fc; text-shadow: 0 0 10px #a855f7, 0 0 25px #a855f7; }
+
+	.host-tile--teal {
+		border: 2px solid #00d4aa;
+		box-shadow: 0 0 12px #00d4aa, 0 0 30px rgba(0,212,170,0.3), inset 0 0 20px rgba(0,212,170,0.08);
+	}
+	.host-tile--teal .host-name { color: #00d4aa; text-shadow: 0 0 10px #00d4aa, 0 0 25px #00d4aa; }
+
+	.learn-more-btn {
+		display: inline-block;
+		margin-top: 2.5rem;
+		padding: 0.85rem 2.5rem;
+		font-family: 'Press Start 2P', 'Courier New', monospace;
+		font-size: 0.75rem;
+		color: #13151a;
+		background: #00d4aa;
+		border: none;
+		border-radius: 6px;
+		text-decoration: none;
+		letter-spacing: 0.08em;
+		box-shadow: 0 0 12px #00d4aa, 0 0 30px rgba(0,212,170,0.4);
+		transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+	}
+	.learn-more-btn:hover {
+		background: #00ffcc;
+		box-shadow: 0 0 20px #00ffcc, 0 0 50px rgba(0,255,204,0.5);
+		transform: translateY(-2px);
+	}
 
 	.youtube-wrapper {
 		max-width: 90rem;
+		width: 100%;
+		gap: 1.5rem;
+		margin: 0 auto;
 	}
 	.youtube-vid {
-		
-		//max-width: fit-content;
+		width: 100%;
 		margin-left: auto;
 		margin-right: auto;
 		margin-bottom: 1rem;
@@ -258,34 +673,42 @@ import SubscribeBar from '../components/SubscribeBar.astro';
 
 	.youtube-iframe {
 		aspect-ratio: 16 / 9;
-		width: 440px;
-		
+		width: 100%;
 	}
 
-	.news-card {
-		aspect-ratio: 16 / 9;
-		width: 440px;
+	.news-wrapper {
+		gap: 1.5rem;
+	}
+	.view-all {
+		text-align: center;
+		margin-top: 1.5rem;
+	}
+	.view-all-link {
+		color: #4ddbff;
+		text-decoration: none;
+		font-size: 1.1rem;
+	}
+	.view-all-link:hover {
+		text-decoration: underline;
 	}
     
 
-	span.rise-shake {
-		animation: jump-shaking 0.83s infinite;
-	}
-
-	@keyframes jump-shaking {
-		0% { transform: translateX(0) }
-		25% { transform: translateY(-3px) }
-		35% { transform: translateY(-3px) rotate(2deg) }
-		55% { transform: translateY(-3px) rotate(-2deg) }
-		65% { transform: translateY(-3px) rotate(2deg) }
-		75% { transform: translateY(-3px) rotate(-2deg) }
-		100% { transform: translateY(0) rotate(0) }
-	}
 
 	/* Mobile - 1023px */
 @media only screen and (max-width: 63.9375rem) {
 	main {
 		margin-top: 3rem;
+	}
+	.host-tile {
+		min-width: 80px;
+		max-width: 110px;
+		padding: 1.2rem 0.5rem;
+	}
+	.host-name {
+		font-size: 0.55rem;
+	}
+	.hosts-grid {
+		gap: 0.75rem;
 	}
 	
 	.banner-container {
@@ -299,106 +722,93 @@ import SubscribeBar from '../components/SubscribeBar.astro';
     }
 	.title {
 		width: 90%;
-		padding-top: 20vh;
+		margin-top: 9rem;
 		margin-left: auto;
 		margin-right: auto;
 	}
-	.podcast-line {
-		font-size: 1.75rem;;
+	.title-good {
+		font-size: 1.55rem;
 	}
-	.title p {
-		font-size: 0.75rem;
+	.title-gaming {
+		font-size: 2.9rem;
 	}
-	.title h1 {
-		font-size: 30px;
-	}
-	.title h2 {
-		font-size: 20px;
+	.title-podcast {
+		font-size: 1.7rem;
+		margin-top: 1.2rem;
 	}
 	
+	.tagline {
+		margin-top: 2.5rem;
+		font-size: 1.1rem;
+		color: #cac7ff;
+		text-shadow:
+			0 0 8px rgba(167, 164, 224, 0.9),
+			0 0 20px rgba(167, 164, 224, 0.5),
+			0 0 40px rgba(77, 219, 255, 0.25);
+	}
 	.about-text {
 		font-size: 1rem;;
-		text-align: center;	
+		text-align: center;
 		padding-top: 0.5rem;
 	}
 
-	.banner-content-left {
-		aspect-ratio: 16 / 9;
-		width: 90vw;
-		height: auto;
-		background-color: rgba(0, 0, 0, 0.7);
-		flex: 100%;
-		position: relative;
+	.images-section {
+		flex-direction: column;
+		padding: 2rem 1.25rem;
+		gap: 1.5rem;
 	}
+	.banner-content-left,
 	.banner-content-right {
-		margin-top: 2rem;
-		aspect-ratio: 16 / 9;
-		width: 90vw;
-		height: auto;
-		position: relative;
-		flex: 100%;
+		width: 100%;
 	}
-
-	.banner {
-		background-position: 50%;
+	.banner-content-right img {
+		width: 100%;
+	}
+	.listen-cards {
+		position: absolute;
+		inset: 0;
+		flex-direction: unset;
+		gap: unset;
+		padding: 0;
+		pointer-events: none;
+	}
+	.listen-badge {
+		position: absolute;
+		pointer-events: all;
+		display: block;
+		width: 38%;
+	}
+	.listen-badge:nth-child(1) { /* Spotify — upper left, hangs from top-left */
+		top: 57%;
+		left: 5%;
+		transform: rotate(12deg);
+		transform-origin: top left;
+	}
+	.listen-badge:nth-child(2) { /* Apple — middle right, hangs from top-right */
+		top: 71%;
+		right: 5%;
+		left: auto;
+		transform: rotate(-10deg);
+		transform-origin: top right;
+	}
+	.listen-badge:nth-child(3) { /* YouTube — lower center, hangs from top-left */
+		top: 87%;
+		left: 20%;
 		
 	}
-	.subscribe {
-		transform: translateY(4rem);
-		position: absolute;
-		background-color: black;
-        border-radius: 10px;
-        width: 100vw;
-        height: 4rem;
-		bottom: 0;
-        //margin-top: 100vh;
-        z-index: 20;
-	}
-
-	.subscribe span {
-		font-size: 1rem;
-		margin-top: auto;
-		margin-bottom: auto;
-	}
-
-	.icon-container { 
-		display: flex;
-		height: 4rem;
-        justify-content: center;
-		align-items: center;
-        gap: 2rem;
-		margin: auto;
-		position: absolute;
-  		top: 0; left: 0; bottom: 0; right: 0;
-    }
-    
-	.icon-container img {
-		width: 50px;
-		padding: 5px;
-	}
-	.youtube-icon img{
-		width: 50px;
-		height: auto;
-	}
-	.youtube-iframe {
-		aspect-ratio: 16 / 9;
-		width: 360px;
-		
-	}
-	.news-card {
-		aspect-ratio: 16 / 9;
-		width: 360px;
+	.listen-badge img {
+		display: block;
+		width: 100% !important;
+		height: auto !important;
 	}
 }
+
 @media only screen and (min-width: 64rem) {
 	.title {
 		width: 60%;
-		padding-top: 20vh;
+		margin-top: 14rem;
 		margin-left: auto;
 		margin-right: auto;
-	}
-	.podcast-line {
-		font-size: 3rem;;
 	}
 	
 	.instructions {
@@ -409,83 +819,389 @@ import SubscribeBar from '../components/SubscribeBar.astro';
 		border-radius: 8px;
 		margin-top: 8rem;
 	}
-	.banner-container {		
-		display: flex;
-		padding-top: 10rem;
-		//padding-bottom: 5rem;
-		justify-content: center;
-		margin-right: auto;
-		margin-left: auto;
-		
-	}
 	.about-text {
 		font-size: 1.5rem;
 		text-align: center;
 		padding-top: 1rem;
 	}
+	.tagline {
+		position: absolute;
+		bottom: 13rem;
+		left: 0;
+		right: 0;
+		margin: 0;
+		font-size: 1.8rem;
+		color: #cac7ff;
+		text-shadow:
+			0 0 8px rgba(167, 164, 224, 0.9),
+			0 0 20px rgba(167, 164, 224, 0.5),
+			0 0 40px rgba(77, 219, 255, 0.25);
+	}
 	.banner-content-left {
-		aspect-ratio: 16 / 9;
-		
-		background-color: rgba(0, 0, 0, 0.7);
-		flex: 50%;
+		flex: 0 0 280px;
+		background-color: rgba(0, 0, 0, 0.4);
+		border-radius: 8px;
+		padding: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 	}
 	.banner-content-right {
-		aspect-ratio: 16 / 9;
-		height: auto;
-		position: relative;
-		flex: 50%;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 	.banner-content-right img {
 		width: 100%;
+		height: auto;
+		border-radius: 8px;
 	}
-	.subscribe {
-		transform: translateY(7vh);
-		background-color: black;
-        
-        width: 100vw;
-        height: 8rem;
-        //margin-top: 100vh;
-        z-index: 20;
-        //position: absolute; 
-		
-        margin-left: auto;
-		margin-right: auto;
-	}
-
-	.subscribe span {
-		font-size: 3rem;
-		margin-top: auto;
-		margin-bottom: auto;
-	}
-	.subscribe a {
-		width: 5.5rem;
-	}
-
-	.icon-container {  
-		display: flex;
-        justify-content: center;
-		align-items: center;
-        gap: 4rem;
-		margin: auto;
-  		position: absolute;
-  		top: 0; left: 0; bottom: 0; right: 0;
-    }
-	.icon-container img {
-		width: 10rem;
-		//padding: 10px;
-	}  
-    
-    .icon {
-        width: 5rem;
-        height: 5rem;
-        justify-content: center;
-        align-self: center;     
-		margin-top: auto;
-		margin-bottom: auto;
-    }
-
 }
-	
+
+/* ---- Octopus Alien (left, purple) ---- */
+	.octopus-container {
+		position: absolute;
+		left: 5%;
+		top: 48%;
+		z-index: 2;
+		width: 80px;
+		height: 80px;
+	}
+
+	.octopus {
+		display: block;
+		width: 10px;
+		height: 10px;
+		background: transparent;
+		animation: octopus-walk 0.8s steps(1) infinite;
+		filter: drop-shadow(0 0 6px #a855f7);
+	}
+
+	@media only screen and (min-width: 64rem) {
+		.octopus-container {
+			left: auto;
+			right: 6%;
+			top: 66%;
+			transform: none;
+		}
+	}
+
+	@keyframes octopus-walk {
+		0%, 100% {
+			box-shadow:
+				/* row 0 */ 20px 0 0 0 #a855f7, 30px 0 0 0 #a855f7, 40px 0 0 0 #a855f7, 50px 0 0 0 #a855f7,
+				/* row 1 */ 0 10px 0 0 #a855f7, 10px 10px 0 0 #a855f7, 20px 10px 0 0 #a855f7, 30px 10px 0 0 #a855f7, 40px 10px 0 0 #a855f7, 50px 10px 0 0 #a855f7, 60px 10px 0 0 #a855f7, 70px 10px 0 0 #a855f7,
+				/* row 2 */ 0 20px 0 0 #a855f7, 10px 20px 0 0 #a855f7, 30px 20px 0 0 #a855f7, 40px 20px 0 0 #a855f7, 60px 20px 0 0 #a855f7, 70px 20px 0 0 #a855f7,
+				/* row 3 */ 0 30px 0 0 #a855f7, 10px 30px 0 0 #a855f7, 20px 30px 0 0 #a855f7, 30px 30px 0 0 #a855f7, 40px 30px 0 0 #a855f7, 50px 30px 0 0 #a855f7, 60px 30px 0 0 #a855f7, 70px 30px 0 0 #a855f7,
+				/* row 4 */ 10px 40px 0 0 #a855f7, 20px 40px 0 0 #a855f7, 30px 40px 0 0 #a855f7, 40px 40px 0 0 #a855f7, 50px 40px 0 0 #a855f7, 60px 40px 0 0 #a855f7,
+				/* row 5 */ 0 50px 0 0 #a855f7, 30px 50px 0 0 #a855f7, 40px 50px 0 0 #a855f7, 70px 50px 0 0 #a855f7,
+				/* row 6 */ 10px 60px 0 0 #a855f7, 60px 60px 0 0 #a855f7,
+				/* row 7 */ 0 70px 0 0 #a855f7, 70px 70px 0 0 #a855f7;
+		}
+		50% {
+			box-shadow:
+				/* row 0 */ 20px 0 0 0 #a855f7, 30px 0 0 0 #a855f7, 40px 0 0 0 #a855f7, 50px 0 0 0 #a855f7,
+				/* row 1 */ 0 10px 0 0 #a855f7, 10px 10px 0 0 #a855f7, 20px 10px 0 0 #a855f7, 30px 10px 0 0 #a855f7, 40px 10px 0 0 #a855f7, 50px 10px 0 0 #a855f7, 60px 10px 0 0 #a855f7, 70px 10px 0 0 #a855f7,
+				/* row 2 */ 0 20px 0 0 #a855f7, 10px 20px 0 0 #a855f7, 30px 20px 0 0 #a855f7, 40px 20px 0 0 #a855f7, 60px 20px 0 0 #a855f7, 70px 20px 0 0 #a855f7,
+				/* row 3 */ 0 30px 0 0 #a855f7, 10px 30px 0 0 #a855f7, 20px 30px 0 0 #a855f7, 30px 30px 0 0 #a855f7, 40px 30px 0 0 #a855f7, 50px 30px 0 0 #a855f7, 60px 30px 0 0 #a855f7, 70px 30px 0 0 #a855f7,
+				/* row 4 */ 10px 40px 0 0 #a855f7, 20px 40px 0 0 #a855f7, 30px 40px 0 0 #a855f7, 40px 40px 0 0 #a855f7, 50px 40px 0 0 #a855f7, 60px 40px 0 0 #a855f7,
+				/* row 5 */ 0 50px 0 0 #a855f7, 30px 50px 0 0 #a855f7, 40px 50px 0 0 #a855f7, 70px 50px 0 0 #a855f7,
+				/* row 6 */ 0 60px 0 0 #a855f7, 70px 60px 0 0 #a855f7,
+				/* row 7 */ 10px 70px 0 0 #a855f7, 60px 70px 0 0 #a855f7;
+		}
+	}
+
+/* ---- Squid Alien (left, pink) ---- */
+	.squid-container {
+		position: absolute;
+		left: 8%;
+		top: 62%;
+		z-index: 2;
+		width: 80px;
+		height: 80px;
+	}
+
+	.squid {
+		display: block;
+		width: 10px;
+		height: 10px;
+		background: transparent;
+		animation: squid-walk 0.8s steps(1) infinite;
+		filter: drop-shadow(0 0 6px #df53f5);
+	}
+
+	@media only screen and (min-width: 64rem) {
+		.squid-container {
+			left: 18%;
+			top: 58%;
+			transform: none;
+		}
+	}
+
+	@keyframes squid-walk {
+		0%, 100% {
+			box-shadow:
+				/* row 0 */ 20px 0 0 0 #df53f5, 30px 0 0 0 #df53f5,
+				/* row 1 */ 10px 10px 0 0 #df53f5, 20px 10px 0 0 #df53f5, 30px 10px 0 0 #df53f5, 40px 10px 0 0 #df53f5,
+				/* row 2 */ 0 20px 0 0 #df53f5, 10px 20px 0 0 #df53f5, 20px 20px 0 0 #df53f5, 30px 20px 0 0 #df53f5, 40px 20px 0 0 #df53f5, 50px 20px 0 0 #df53f5,
+				/* row 3 */ 0 30px 0 0 #df53f5, 20px 30px 0 0 #df53f5, 30px 30px 0 0 #df53f5, 50px 30px 0 0 #df53f5,
+				/* row 4 */ 0 40px 0 0 #df53f5, 10px 40px 0 0 #df53f5, 20px 40px 0 0 #df53f5, 30px 40px 0 0 #df53f5, 40px 40px 0 0 #df53f5, 50px 40px 0 0 #df53f5,
+				/* row 5 */ 10px 50px 0 0 #df53f5, 40px 50px 0 0 #df53f5,
+				/* row 6 */ 0 60px 0 0 #df53f5, 50px 60px 0 0 #df53f5,
+				/* row 7 */ 10px 70px 0 0 #df53f5, 40px 70px 0 0 #df53f5;
+		}
+		50% {
+			box-shadow:
+				/* row 0 */ 20px 0 0 0 #df53f5, 30px 0 0 0 #df53f5,
+				/* row 1 */ 10px 10px 0 0 #df53f5, 20px 10px 0 0 #df53f5, 30px 10px 0 0 #df53f5, 40px 10px 0 0 #df53f5,
+				/* row 2 */ 0 20px 0 0 #df53f5, 10px 20px 0 0 #df53f5, 20px 20px 0 0 #df53f5, 30px 20px 0 0 #df53f5, 40px 20px 0 0 #df53f5, 50px 20px 0 0 #df53f5,
+				/* row 3 */ 0 30px 0 0 #df53f5, 20px 30px 0 0 #df53f5, 30px 30px 0 0 #df53f5, 50px 30px 0 0 #df53f5,
+				/* row 4 */ 0 40px 0 0 #df53f5, 10px 40px 0 0 #df53f5, 20px 40px 0 0 #df53f5, 30px 40px 0 0 #df53f5, 40px 40px 0 0 #df53f5, 50px 40px 0 0 #df53f5,
+				/* row 5 */ 0 50px 0 0 #df53f5, 50px 50px 0 0 #df53f5,
+				/* row 6 */ 10px 60px 0 0 #df53f5, 40px 60px 0 0 #df53f5,
+				/* row 7 */ 0 70px 0 0 #df53f5, 50px 70px 0 0 #df53f5;
+		}
+	}
+
+/* ---- Space Invader ---- */
+	.alien-container {
+		position: absolute;
+		right: 8%;
+		top: 62%;
+		z-index: 2;
+		width: 110px;
+		height: 80px;
+	}
+
+	.alien {
+		display: block;
+		width: 10px;
+		height: 10px;
+		background: transparent;
+		animation: alien-walk 0.8s steps(1) infinite;
+		filter: drop-shadow(0 0 6px #4ddbff);
+	}
+
+	@media only screen and (min-width: 64rem) {
+		.alien-container {
+			left: auto;
+			right: 18%;
+			top: 58%;
+			transform: none;
+		}
+	}
+
+	@keyframes alien-walk {
+		0%, 100% {
+			box-shadow:
+				/* row 0 */ 20px 0 0 0 #4ddbff, 80px 0 0 0 #4ddbff,
+				/* row 1 */ 30px 10px 0 0 #4ddbff, 70px 10px 0 0 #4ddbff,
+				/* row 2 */ 20px 20px 0 0 #4ddbff, 30px 20px 0 0 #4ddbff, 40px 20px 0 0 #4ddbff, 50px 20px 0 0 #4ddbff, 60px 20px 0 0 #4ddbff, 70px 20px 0 0 #4ddbff, 80px 20px 0 0 #4ddbff,
+				/* row 3 */ 10px 30px 0 0 #4ddbff, 20px 30px 0 0 #4ddbff, 40px 30px 0 0 #4ddbff, 50px 30px 0 0 #4ddbff, 60px 30px 0 0 #4ddbff, 80px 30px 0 0 #4ddbff, 90px 30px 0 0 #4ddbff,
+				/* row 4 */ 0 40px 0 0 #4ddbff, 10px 40px 0 0 #4ddbff, 20px 40px 0 0 #4ddbff, 30px 40px 0 0 #4ddbff, 40px 40px 0 0 #4ddbff, 50px 40px 0 0 #4ddbff, 60px 40px 0 0 #4ddbff, 70px 40px 0 0 #4ddbff, 80px 40px 0 0 #4ddbff, 90px 40px 0 0 #4ddbff, 100px 40px 0 0 #4ddbff,
+				/* row 5 */ 0 50px 0 0 #4ddbff, 20px 50px 0 0 #4ddbff, 30px 50px 0 0 #4ddbff, 40px 50px 0 0 #4ddbff, 50px 50px 0 0 #4ddbff, 60px 50px 0 0 #4ddbff, 70px 50px 0 0 #4ddbff, 80px 50px 0 0 #4ddbff, 100px 50px 0 0 #4ddbff,
+				/* row 6 */ 0 60px 0 0 #4ddbff, 20px 60px 0 0 #4ddbff, 80px 60px 0 0 #4ddbff, 100px 60px 0 0 #4ddbff,
+				/* row 7 */ 30px 70px 0 0 #4ddbff, 40px 70px 0 0 #4ddbff, 60px 70px 0 0 #4ddbff, 70px 70px 0 0 #4ddbff;
+		}
+		50% {
+			box-shadow:
+				/* row 0 */ 20px 0 0 0 #4ddbff, 80px 0 0 0 #4ddbff,
+				/* row 1 */ 0 10px 0 0 #4ddbff, 30px 10px 0 0 #4ddbff, 70px 10px 0 0 #4ddbff, 100px 10px 0 0 #4ddbff,
+				/* row 2 */ 0 20px 0 0 #4ddbff, 20px 20px 0 0 #4ddbff, 30px 20px 0 0 #4ddbff, 40px 20px 0 0 #4ddbff, 50px 20px 0 0 #4ddbff, 60px 20px 0 0 #4ddbff, 70px 20px 0 0 #4ddbff, 80px 20px 0 0 #4ddbff, 100px 20px 0 0 #4ddbff,
+				/* row 3 */ 0 30px 0 0 #4ddbff, 10px 30px 0 0 #4ddbff, 20px 30px 0 0 #4ddbff, 40px 30px 0 0 #4ddbff, 50px 30px 0 0 #4ddbff, 60px 30px 0 0 #4ddbff, 80px 30px 0 0 #4ddbff, 90px 30px 0 0 #4ddbff, 100px 30px 0 0 #4ddbff,
+				/* row 4 */ 0 40px 0 0 #4ddbff, 10px 40px 0 0 #4ddbff, 20px 40px 0 0 #4ddbff, 30px 40px 0 0 #4ddbff, 40px 40px 0 0 #4ddbff, 50px 40px 0 0 #4ddbff, 60px 40px 0 0 #4ddbff, 70px 40px 0 0 #4ddbff, 80px 40px 0 0 #4ddbff, 90px 40px 0 0 #4ddbff, 100px 40px 0 0 #4ddbff,
+				/* row 5 */ 10px 50px 0 0 #4ddbff, 20px 50px 0 0 #4ddbff, 30px 50px 0 0 #4ddbff, 40px 50px 0 0 #4ddbff, 50px 50px 0 0 #4ddbff, 60px 50px 0 0 #4ddbff, 70px 50px 0 0 #4ddbff, 80px 50px 0 0 #4ddbff, 90px 50px 0 0 #4ddbff,
+				/* row 6 */ 20px 60px 0 0 #4ddbff, 80px 60px 0 0 #4ddbff,
+				/* row 7 */ 10px 70px 0 0 #4ddbff, 90px 70px 0 0 #4ddbff;
+		}
+	}
+
+/* ---- Teal Crab (upper left) ---- */
+	.crab-teal-container {
+		position: absolute;
+		left: 3%;
+		top: 25%;
+		z-index: 2;
+		width: 110px;
+		height: 80px;
+	}
+	.crab-teal {
+		display: block;
+		width: 10px;
+		height: 10px;
+		background: transparent;
+		animation: crab-teal-walk 0.8s steps(1) infinite;
+		filter: drop-shadow(0 0 6px #00d4aa);
+	}
+	@media only screen and (min-width: 64rem) {
+		.crab-teal-container { left: 4%; top: 22%; }
+	}
+	@keyframes crab-teal-walk {
+		0%, 100% {
+			box-shadow:
+				/* row 0 */ 20px 0 0 0 #00d4aa, 80px 0 0 0 #00d4aa,
+				/* row 1 */ 30px 10px 0 0 #00d4aa, 70px 10px 0 0 #00d4aa,
+				/* row 2 */ 20px 20px 0 0 #00d4aa, 30px 20px 0 0 #00d4aa, 40px 20px 0 0 #00d4aa, 50px 20px 0 0 #00d4aa, 60px 20px 0 0 #00d4aa, 70px 20px 0 0 #00d4aa, 80px 20px 0 0 #00d4aa,
+				/* row 3 */ 10px 30px 0 0 #00d4aa, 20px 30px 0 0 #00d4aa, 40px 30px 0 0 #00d4aa, 50px 30px 0 0 #00d4aa, 60px 30px 0 0 #00d4aa, 80px 30px 0 0 #00d4aa, 90px 30px 0 0 #00d4aa,
+				/* row 4 */ 0 40px 0 0 #00d4aa, 10px 40px 0 0 #00d4aa, 20px 40px 0 0 #00d4aa, 30px 40px 0 0 #00d4aa, 40px 40px 0 0 #00d4aa, 50px 40px 0 0 #00d4aa, 60px 40px 0 0 #00d4aa, 70px 40px 0 0 #00d4aa, 80px 40px 0 0 #00d4aa, 90px 40px 0 0 #00d4aa, 100px 40px 0 0 #00d4aa,
+				/* row 5 */ 0 50px 0 0 #00d4aa, 20px 50px 0 0 #00d4aa, 30px 50px 0 0 #00d4aa, 40px 50px 0 0 #00d4aa, 50px 50px 0 0 #00d4aa, 60px 50px 0 0 #00d4aa, 70px 50px 0 0 #00d4aa, 80px 50px 0 0 #00d4aa, 100px 50px 0 0 #00d4aa,
+				/* row 6 */ 0 60px 0 0 #00d4aa, 20px 60px 0 0 #00d4aa, 80px 60px 0 0 #00d4aa, 100px 60px 0 0 #00d4aa,
+				/* row 7 */ 30px 70px 0 0 #00d4aa, 40px 70px 0 0 #00d4aa, 60px 70px 0 0 #00d4aa, 70px 70px 0 0 #00d4aa;
+		}
+		50% {
+			box-shadow:
+				/* row 0 */ 20px 0 0 0 #00d4aa, 80px 0 0 0 #00d4aa,
+				/* row 1 */ 0 10px 0 0 #00d4aa, 30px 10px 0 0 #00d4aa, 70px 10px 0 0 #00d4aa, 100px 10px 0 0 #00d4aa,
+				/* row 2 */ 0 20px 0 0 #00d4aa, 20px 20px 0 0 #00d4aa, 30px 20px 0 0 #00d4aa, 40px 20px 0 0 #00d4aa, 50px 20px 0 0 #00d4aa, 60px 20px 0 0 #00d4aa, 70px 20px 0 0 #00d4aa, 80px 20px 0 0 #00d4aa, 100px 20px 0 0 #00d4aa,
+				/* row 3 */ 0 30px 0 0 #00d4aa, 10px 30px 0 0 #00d4aa, 20px 30px 0 0 #00d4aa, 40px 30px 0 0 #00d4aa, 50px 30px 0 0 #00d4aa, 60px 30px 0 0 #00d4aa, 80px 30px 0 0 #00d4aa, 90px 30px 0 0 #00d4aa, 100px 30px 0 0 #00d4aa,
+				/* row 4 */ 0 40px 0 0 #00d4aa, 10px 40px 0 0 #00d4aa, 20px 40px 0 0 #00d4aa, 30px 40px 0 0 #00d4aa, 40px 40px 0 0 #00d4aa, 50px 40px 0 0 #00d4aa, 60px 40px 0 0 #00d4aa, 70px 40px 0 0 #00d4aa, 80px 40px 0 0 #00d4aa, 90px 40px 0 0 #00d4aa, 100px 40px 0 0 #00d4aa,
+				/* row 5 */ 10px 50px 0 0 #00d4aa, 20px 50px 0 0 #00d4aa, 30px 50px 0 0 #00d4aa, 40px 50px 0 0 #00d4aa, 50px 50px 0 0 #00d4aa, 60px 50px 0 0 #00d4aa, 70px 50px 0 0 #00d4aa, 80px 50px 0 0 #00d4aa, 90px 50px 0 0 #00d4aa,
+				/* row 6 */ 20px 60px 0 0 #00d4aa, 80px 60px 0 0 #00d4aa,
+				/* row 7 */ 10px 70px 0 0 #00d4aa, 90px 70px 0 0 #00d4aa;
+		}
+	}
+
+/* ---- Yellow Squid (upper right) ---- */
+	.squid-yellow-container {
+		position: absolute;
+		right: 4%;
+		top: 25%;
+		z-index: 2;
+		width: 80px;
+		height: 80px;
+	}
+	.squid-yellow {
+		display: block;
+		width: 10px;
+		height: 10px;
+		background: transparent;
+		animation: squid-yellow-walk 0.8s steps(1) infinite;
+		filter: drop-shadow(0 0 6px #ffd93d);
+	}
+	@media only screen and (min-width: 64rem) {
+		.squid-yellow-container { right: 5%; top: 22%; }
+	}
+	@keyframes squid-yellow-walk {
+		0%, 100% {
+			box-shadow:
+				/* row 0 */ 20px 0 0 0 #ffd93d, 30px 0 0 0 #ffd93d,
+				/* row 1 */ 10px 10px 0 0 #ffd93d, 20px 10px 0 0 #ffd93d, 30px 10px 0 0 #ffd93d, 40px 10px 0 0 #ffd93d,
+				/* row 2 */ 0 20px 0 0 #ffd93d, 10px 20px 0 0 #ffd93d, 20px 20px 0 0 #ffd93d, 30px 20px 0 0 #ffd93d, 40px 20px 0 0 #ffd93d, 50px 20px 0 0 #ffd93d,
+				/* row 3 */ 0 30px 0 0 #ffd93d, 20px 30px 0 0 #ffd93d, 30px 30px 0 0 #ffd93d, 50px 30px 0 0 #ffd93d,
+				/* row 4 */ 0 40px 0 0 #ffd93d, 10px 40px 0 0 #ffd93d, 20px 40px 0 0 #ffd93d, 30px 40px 0 0 #ffd93d, 40px 40px 0 0 #ffd93d, 50px 40px 0 0 #ffd93d,
+				/* row 5 */ 10px 50px 0 0 #ffd93d, 40px 50px 0 0 #ffd93d,
+				/* row 6 */ 0 60px 0 0 #ffd93d, 50px 60px 0 0 #ffd93d,
+				/* row 7 */ 10px 70px 0 0 #ffd93d, 40px 70px 0 0 #ffd93d;
+		}
+		50% {
+			box-shadow:
+				/* row 0 */ 20px 0 0 0 #ffd93d, 30px 0 0 0 #ffd93d,
+				/* row 1 */ 10px 10px 0 0 #ffd93d, 20px 10px 0 0 #ffd93d, 30px 10px 0 0 #ffd93d, 40px 10px 0 0 #ffd93d,
+				/* row 2 */ 0 20px 0 0 #ffd93d, 10px 20px 0 0 #ffd93d, 20px 20px 0 0 #ffd93d, 30px 20px 0 0 #ffd93d, 40px 20px 0 0 #ffd93d, 50px 20px 0 0 #ffd93d,
+				/* row 3 */ 0 30px 0 0 #ffd93d, 20px 30px 0 0 #ffd93d, 30px 30px 0 0 #ffd93d, 50px 30px 0 0 #ffd93d,
+				/* row 4 */ 0 40px 0 0 #ffd93d, 10px 40px 0 0 #ffd93d, 20px 40px 0 0 #ffd93d, 30px 40px 0 0 #ffd93d, 40px 40px 0 0 #ffd93d, 50px 40px 0 0 #ffd93d,
+				/* row 5 */ 0 50px 0 0 #ffd93d, 50px 50px 0 0 #ffd93d,
+				/* row 6 */ 10px 60px 0 0 #ffd93d, 40px 60px 0 0 #ffd93d,
+				/* row 7 */ 0 70px 0 0 #ffd93d, 50px 70px 0 0 #ffd93d;
+		}
+	}
+
+/* ---- Pastel Orange Octopus (lower right) ---- */
+	.octopus-orange-container {
+		position: absolute;
+		right: 5%;
+		top: 70%;
+		z-index: 2;
+		width: 80px;
+		height: 80px;
+	}
+	.octopus-orange {
+		display: block;
+		width: 10px;
+		height: 10px;
+		background: transparent;
+		animation: octopus-orange-walk 0.8s steps(1) infinite;
+		filter: drop-shadow(0 0 6px #ffad6b);
+	}
+	@media only screen and (min-width: 64rem) {
+		.octopus-orange-container { left: 10%; right: auto; top: 44%; }
+	}
+	@keyframes octopus-orange-walk {
+		0%, 100% {
+			box-shadow:
+				/* row 0 */ 20px 0 0 0 #ffad6b, 30px 0 0 0 #ffad6b, 40px 0 0 0 #ffad6b, 50px 0 0 0 #ffad6b,
+				/* row 1 */ 0 10px 0 0 #ffad6b, 10px 10px 0 0 #ffad6b, 20px 10px 0 0 #ffad6b, 30px 10px 0 0 #ffad6b, 40px 10px 0 0 #ffad6b, 50px 10px 0 0 #ffad6b, 60px 10px 0 0 #ffad6b, 70px 10px 0 0 #ffad6b,
+				/* row 2 */ 0 20px 0 0 #ffad6b, 10px 20px 0 0 #ffad6b, 30px 20px 0 0 #ffad6b, 40px 20px 0 0 #ffad6b, 60px 20px 0 0 #ffad6b, 70px 20px 0 0 #ffad6b,
+				/* row 3 */ 0 30px 0 0 #ffad6b, 10px 30px 0 0 #ffad6b, 20px 30px 0 0 #ffad6b, 30px 30px 0 0 #ffad6b, 40px 30px 0 0 #ffad6b, 50px 30px 0 0 #ffad6b, 60px 30px 0 0 #ffad6b, 70px 30px 0 0 #ffad6b,
+				/* row 4 */ 10px 40px 0 0 #ffad6b, 20px 40px 0 0 #ffad6b, 30px 40px 0 0 #ffad6b, 40px 40px 0 0 #ffad6b, 50px 40px 0 0 #ffad6b, 60px 40px 0 0 #ffad6b,
+				/* row 5 */ 0 50px 0 0 #ffad6b, 30px 50px 0 0 #ffad6b, 40px 50px 0 0 #ffad6b, 70px 50px 0 0 #ffad6b,
+				/* row 6 */ 10px 60px 0 0 #ffad6b, 60px 60px 0 0 #ffad6b,
+				/* row 7 */ 0 70px 0 0 #ffad6b, 70px 70px 0 0 #ffad6b;
+		}
+		50% {
+			box-shadow:
+				/* row 0 */ 20px 0 0 0 #ffad6b, 30px 0 0 0 #ffad6b, 40px 0 0 0 #ffad6b, 50px 0 0 0 #ffad6b,
+				/* row 1 */ 0 10px 0 0 #ffad6b, 10px 10px 0 0 #ffad6b, 20px 10px 0 0 #ffad6b, 30px 10px 0 0 #ffad6b, 40px 10px 0 0 #ffad6b, 50px 10px 0 0 #ffad6b, 60px 10px 0 0 #ffad6b, 70px 10px 0 0 #ffad6b,
+				/* row 2 */ 0 20px 0 0 #ffad6b, 10px 20px 0 0 #ffad6b, 30px 20px 0 0 #ffad6b, 40px 20px 0 0 #ffad6b, 60px 20px 0 0 #ffad6b, 70px 20px 0 0 #ffad6b,
+				/* row 3 */ 0 30px 0 0 #ffad6b, 10px 30px 0 0 #ffad6b, 20px 30px 0 0 #ffad6b, 30px 30px 0 0 #ffad6b, 40px 30px 0 0 #ffad6b, 50px 30px 0 0 #ffad6b, 60px 30px 0 0 #ffad6b, 70px 30px 0 0 #ffad6b,
+				/* row 4 */ 10px 40px 0 0 #ffad6b, 20px 40px 0 0 #ffad6b, 30px 40px 0 0 #ffad6b, 40px 40px 0 0 #ffad6b, 50px 40px 0 0 #ffad6b, 60px 40px 0 0 #ffad6b,
+				/* row 5 */ 0 50px 0 0 #ffad6b, 30px 50px 0 0 #ffad6b, 40px 50px 0 0 #ffad6b, 70px 50px 0 0 #ffad6b,
+				/* row 6 */ 0 60px 0 0 #ffad6b, 70px 60px 0 0 #ffad6b,
+				/* row 7 */ 10px 70px 0 0 #ffad6b, 60px 70px 0 0 #ffad6b;
+		}
+	}
+
+	/* Mobile alien positions — must come after base alien styles */
+	@media only screen and (max-width: 63.9375rem) {
+		/* Spotify (top: 57%, left: 5%): cyan crab + yellow squid */
+		.alien-container {
+			left: 5%;
+			right: auto;
+			top: 53%;
+			transform: scale(0.5);
+			transform-origin: top left;
+		}
+		.squid-yellow-container {
+			left: 34%;
+			right: auto;
+			top: 56%;
+			transform: scale(0.5);
+			transform-origin: top left;
+		}
+		/* Apple (top: 71%, right: 5%): pink squid + orange octopus */
+		.squid-container {
+			left: 58%;
+			right: auto;
+			top: 69%;
+			transform: scale(0.5);
+			transform-origin: top left;
+		}
+		.octopus-orange-container {
+			left: 84%;
+			right: auto;
+			top: 67%;
+			transform: scale(0.5);
+			transform-origin: top left;
+		}
+		/* YouTube (top: 87%, left: 20%): purple octopus + teal crab */
+		.octopus-container {
+			left: 21%;
+			right: auto;
+			top: 82.5%;
+			transform: scale(0.5);
+			transform-origin: top left;
+		}
+		.crab-teal-container {
+			left: 46%;
+			right: auto;
+			top: 82.5%;
+			transform: scale(0.5);
+			transform-origin: top left;
+		}
+	}
+
 </style>
 
 <script src="https://kit.fontawesome.com/1c9cfe66fa.js" crossorigin="anonymous"></script>
