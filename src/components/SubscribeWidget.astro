@@ -11,7 +11,7 @@
           <p class="sub-heading">Subscribe!</p>
           <form class="sub-form" onsubmit="handleSubscribe(event)">
             <input type="email" class="sub-input" placeholder="your@email.com" />
-            <button type="submit" class="sub-btn">Go →</button>
+            <button type="submit" class="sub-btn">Sign Up</button>
           </form>
           <p class="sub-confirm" id="sub-confirm"></p>
         </div>
@@ -43,19 +43,26 @@
         <div class="cord-port"></div>
       </div>
 
-      <!-- Wavy cord SVG -->
-      <svg class="cord-svg" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+      <!-- Horizontal cord (desktop) -->
+      <svg class="cord-svg cord-svg--h" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M0,40 C35,40 35,12 72,12 C109,12 109,68 146,68 C168,68 180,40 200,40"
-          stroke="#3a3a58"
-          stroke-width="4"
-          fill="none"
-          stroke-linecap="round"
+          stroke="#3a3a58" stroke-width="4" fill="none" stroke-linecap="round"
         />
-        <!-- cord connector at console end -->
         <rect x="0" y="33" width="8" height="14" rx="2" fill="#2a2a42"/>
-        <!-- cord connector at controller end -->
         <rect x="192" y="33" width="8" height="14" rx="2" fill="#2a2a42"/>
+      </svg>
+
+      <!-- Vertical cord (mobile) -->
+      <svg class="cord-svg cord-svg--v" viewBox="0 0 80 150" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M40,0 C40,30 10,30 10,60 C10,90 70,90 70,120 C70,140 40,140 40,150"
+          stroke="#3a3a58" stroke-width="4" fill="none" stroke-linecap="round"
+        />
+        <!-- connector at console end (top) -->
+        <rect x="31" y="0" width="18" height="8" rx="2" fill="#2a2a42"/>
+        <!-- connector at controller end (bottom) -->
+        <rect x="31" y="142" width="18" height="8" rx="2" fill="#2a2a42"/>
       </svg>
 
       <!-- Controller (SNES-inspired) -->
@@ -108,6 +115,8 @@
     padding: 5rem 2rem 6rem;
     display: flex;
     justify-content: center;
+    position: relative;
+    z-index: 2;
   }
 
   .sub-scene {
@@ -192,16 +201,18 @@
 
   .sub-form {
     display: flex;
+    flex-direction: column;
     gap: 12px;
     width: 100%;
+    align-items: center;
   }
 
   .sub-input {
-    flex: 1;
-    background: #09091a;
+    width: 85%;
+    background: #f0eef8;
     border: 2px solid #2a2a50;
     border-radius: 6px;
-    color: #cac7ff;
+    color: #1a1a2e;
     font-family: 'Raleway', sans-serif;
     font-size: 1.1rem;
     padding: 0.75rem 1.2rem;
@@ -215,7 +226,7 @@
   }
 
   .sub-input::placeholder {
-    color: #44446a;
+    color: #8884aa;
   }
 
   .sub-btn {
@@ -346,12 +357,9 @@
   }
 
   /* ===== CORD ===== */
-  .cord-svg {
-    width: 260px;
-    height: 120px;
-    flex-shrink: 0;
-    overflow: visible;
-  }
+  .cord-svg { flex-shrink: 0; overflow: visible; }
+  .cord-svg--h { width: 260px; height: 120px; display: block; }
+  .cord-svg--v { display: none; }
 
   /* ===== CONTROLLER ===== */
   .controller {
@@ -512,14 +520,14 @@
     .console { width: 360px; height: 110px; }
     .console-slot { width: 74px; height: 70px; }
     .ctrl-body { width: 250px; height: 90px; }
-    .cord-svg { width: 200px; height: 100px; }
+    .cord-svg--h { width: 200px; height: 100px; }
   }
 
   @media (max-width: 760px) {
     .monitor { width: 310px; border-width: 6px; border-radius: 18px 18px 10px 10px; padding: 10px; }
     .monitor-screen { min-height: 200px; padding: 28px 18px; gap: 18px; }
     .sub-heading { font-size: 1rem; }
-    .sub-input { font-size: 0.85rem; padding: 0.5rem 0.8rem; }
+    .sub-input { width: 85%; font-size: 0.85rem; padding: 0.5rem 0.8rem; }
     .sub-btn { font-size: 0.55rem; padding: 0.5rem 0.9rem; }
     .monitor-neck { width: 32px; height: 36px; }
     .monitor-foot { width: 150px; height: 14px; }
@@ -533,7 +541,8 @@
     .c-btn { width: 30px; height: 10px; }
     .c-led { width: 10px; height: 10px; }
     .cord-port { width: 7px; height: 16px; }
-    .cord-svg { transform: rotate(90deg); width: 90px; height: 130px; }
+    .cord-svg--h { display: none; }
+    .cord-svg--v { display: block; width: 80px; height: 130px; }
     .ctrl-body { width: 200px; height: 72px; border-width: 4px; padding: 0 16px; }
     .ctrl-body::before { width: 58px; height: 26px; bottom: -20px; left: 14px; border-width: 4px; }
     .ctrl-body::after  { width: 58px; height: 26px; bottom: -20px; right: 14px; border-width: 4px; }
