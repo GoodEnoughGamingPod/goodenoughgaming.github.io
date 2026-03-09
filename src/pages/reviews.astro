@@ -70,13 +70,18 @@ const allGenres = [...new Set(reviews.map((r) => r.data.genre).filter(Boolean))]
   body {
     min-height: 100vh;
     background: #13151a;
+    display: flex;
+    flex-direction: column;
   }
   main {
+    flex: 1;
     margin: 0 auto;
     padding: 1rem;
     max-width: 90rem;
+    width: 100%;
     color: white;
     margin-top: 8rem;
+    box-sizing: border-box;
   }
   .page-title {
     text-align: center;

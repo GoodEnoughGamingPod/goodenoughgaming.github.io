@@ -2,186 +2,142 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-
-import ps5 from '/public/ps5.png';
-//import banner from '/public/GegBannerNoText.png';
-let banner = '/public/GegBannerNoText.png'
-
 ---
-<Layout title="Good Enough Gaming">	
+<Layout title="Good Enough Gaming">
     <Nav />
-    
-        <body >
-            <div class="div-banner bg-[url('../GegBannerNoText.png')]">
-                <div class="container z-10">
-                    <div class="picture-container">
-                        <div class="picture">
-                            <img src={ps5.src}>
-                        </div>
-                    </div>
-                    <div class="contact-form-container">
-                        <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
-                            <span class="form-header">Contact us</span>
-                            <input type="hidden" name="access_key" value="dca0b549-ebd3-469b-bdf3-fc816e6d3915">
-                            <input type="text" name="name" class="input" placeholder="Your Name" />
-                            <input type="email" name="email" class="input" placeholder="Your Email" />
-                            <textarea name=" message" cols="30" rows="5" placeholder="Enter Your message" class="input"
-                                required></textarea>
-                            <button class="submit" type="submit">Submit</button>
-                        </form>
-                    </div>
-                </div>          
+    <body>
+        <div class="page-wrap">
+            <div class="container">
+                <div class="contact-form-container">
+                    <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+                        <span class="form-header">Contact Us</span>
+                        <input type="hidden" name="access_key" value="dca0b549-ebd3-469b-bdf3-fc816e6d3915">
+                        <input type="text" name="name" class="input" placeholder="Your Name" />
+                        <input type="email" name="email" class="input" placeholder="Your Email" />
+                        <textarea name="message" cols="30" rows="5" placeholder="Enter your message" class="input" required></textarea>
+                        <button class="submit" type="submit">Submit</button>
+                    </form>
+                </div>
             </div>
-            <Footer />
-        </body>
+        </div>
+        <Footer />
+    </body>
 </Layout>
 
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Raleway:wght@400;500;600&display=swap');
 
-<style define:vars={{ banner }}>
     body {
-        height: 100%;
+        min-height: 100vh;
+        background: #13151a;
         display: flex;
         flex-direction: column;
-        //background-image: var(--banner);
-        //background-position: center; /* Center the image */
-        //background-repeat: no-repeat; /* Do not repeat the image */
-        //background-size: cover; /* Resize the background image to cover the entire container */
-        //height: 100vh;
-        //display: flex;
-        //flex-direction: column;
-        //justify-content: center;
-        //align-items: center;
     }
 
-    .div-banner {
-        background-position: center; /* Center the image */
-        background-repeat: no-repeat; /* Do not repeat the image */
-        background-size: cover; /* Resize the background image to cover the entire container */
-        height: 100vh;
+    .page-wrap {
+        flex: 1;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
-    }
-    
-.container {
-    background: #464040;
-    
-    height: 50vh;
-    border-radius: 24px;
-    box-shadow: 16px 16px 8px rgba(0, 0, 0, .1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    }
-.picture-container {
-    width: 50%;
-    height: 100%;
-    align-self: flex-start;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    }
-.picture img {
-   width: 320px;
-   }
- .contact-form-container {
-   height: 90%;
-   width: 40%;
-   }
-.contact-form {
-   height: 100%;
-   width: 100%;
-   display: flex;
-   flex-wrap: wrap;
-   align-content: space-around;
-   }
-.form-header {
-   font-size: 2em;
-   font-weight: 700;
-   align-self: flex-start;
-   color:#8870FF;
-   margin-left: auto;
-   margin-right: auto;
-   }
-.input {
-   border: none;
-   outline: none;
-   background: #eee;
-   padding: 15px;
-   border-radius: 6px;
-   width: 100%;
-   font-size: 100%;
-   font-family: 'Montserrat', sans-serif;
-   }
-.submit {
-   border: none;
-   outline: none;
-   color: #fff;
-   width: 100%;
-   padding: 20px;
-   background: #8870FF;
-   font-size: 100%;
-   font-weight: 600;
-   border-radius: 6px;
-   transition: transform 300ms 0s cubic-bezier(0, 0.23, 0.29, 2.45);
-   }
-.submit:hover {
-   cursor: pointer;
-   background: #7F69EE;
-   transform: translateY(-2px);
-   }
-::placeholder {
-    font-family: 'Montserrat', sans-serif;
-    opacity: 0.5;
-   }
-    
-    @media only screen and (max-width: 63.9375rem) {
-        .container {
-            width: 90vw;
-            margin-top: 5%;
-            margin-bottom: 15%;
-        }
-        .contact-form-container {
-            width: 90%;
-        }
-        .picture-container {
-            display: none;
-        }
+        padding: 8rem 1.5rem 4rem;
     }
 
-    @media only screen and (min-width: 64rem) {
-        .container {
-            width: 60rem;
-            height: 40rem;
-            margin-top: 10%;
-        }
-       
-        .message-field textarea{
-            width: 40rem;
-            height: 20rem;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    .container {
+        background: #1c1c2e;
+        border: 1px solid rgba(77, 219, 255, 0.15);
+        border-radius: 20px;
+        box-shadow:
+            0 0 40px rgba(77, 219, 255, 0.06),
+            0 8px 32px rgba(0, 0, 0, 0.4);
+        width: 100%;
+        max-width: 520px;
+        padding: 3rem 2.5rem;
+    }
+
+    .contact-form-container {
+        width: 100%;
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .form-header {
+        font-family: 'Press Start 2P', monospace;
+        font-size: 1.1rem;
+        color: #4ddbff;
+        text-align: center;
+        display: block;
+        margin-bottom: 0.75rem;
+        text-shadow: 0 0 14px rgba(77, 219, 255, 0.5);
+        letter-spacing: 0.05em;
+    }
+
+    .input {
+        border: 1px solid rgba(167, 164, 224, 0.2);
+        outline: none;
+        background: #0d0d1a;
+        color: #e8e6f0;
+        padding: 0.85rem 1.1rem;
+        border-radius: 8px;
+        width: 100%;
+        font-size: 1rem;
+        font-family: 'Raleway', sans-serif;
+        font-weight: 500;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        box-sizing: border-box;
+        resize: vertical;
+    }
+
+    .input:focus {
+        border-color: #4ddbff;
+        box-shadow: 0 0 10px rgba(77, 219, 255, 0.25);
+    }
+
+    ::placeholder {
+        font-family: 'Raleway', sans-serif;
+        color: #4a4870;
+        opacity: 1;
+    }
+
+    .submit {
+        border: none;
+        outline: none;
+        color: #04040e;
+        width: 100%;
+        padding: 0.9rem;
+        background: #4ddbff;
+        font-family: 'Press Start 2P', monospace;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+        margin-top: 0.5rem;
+    }
+
+    .submit:hover {
+        background: #80e8ff;
+        box-shadow: 0 0 18px rgba(77, 219, 255, 0.5);
+        transform: translateY(-2px);
     }
 </style>
-
 
 <script is:inline>
     const form = document.getElementById('form');
     const result = document.getElementById('result');
-    
+
     form.addEventListener('submit', function(e) {
         const formData = new FormData(form);
         e.preventDefault();
-    
+
         const object = Object.fromEntries(formData);
         const json = JSON.stringify(object);
-    
+
         result.innerHTML = "Please wait..."
-    
+
         fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 headers: {
@@ -210,4 +166,4 @@ let banner = '/public/GegBannerNoText.png'
                 }, 3000);
             });
     });
-    </script>
+</script>
