@@ -70,6 +70,11 @@ import logo from '/public/logo_trans.png';
                         </a>
                     </li>
                     <li class="cs-li">
+                        <a href="https://good-enough-gaming-shop.fourthwall.com/" class="cs-li-link" target="_blank" rel="noopener">
+                            Merch
+                        </a>
+                    </li>
+                    <li class="cs-li">
                         <a href="https://www.patreon.com/" class="cs-li-link" target="_blank" rel="noopener">
                             Patreon
                         </a>
@@ -123,8 +128,8 @@ header .cs-logo img{transition: all linear .3s}
     /*-- -------------------------- -->
 <---     Mobile Navigation      -->
 <--- -------------------------- -*/
-/* Mobile - 1023px */
-@media only screen and (max-width: 63.9375rem) {
+/* Mobile - 1199px */
+@media only screen and (max-width: 74.9375rem) {
   body.cs-open {
     overflow: hidden;
   }
@@ -209,14 +214,24 @@ header .cs-logo img{transition: all linear .3s}
     justify-content: flex-start;
     align-items: center;
     z-index: 10;
+    flex-shrink: 0;
   }
   #cs-navigation .cs-logo img {
-    width: 100px;
-    height: 100px;
+    width: auto;
+    height: clamp(3.5rem, 25vw, 6.25rem);
+    object-fit: contain;
   }
   body.scroll #cs-navigation .cs-logo img {
-    width: 60px;
-    height: 60px;
+    width: auto;
+    height: clamp(2.5rem, 18vw, 3.75rem);
+  }
+  @media only screen and (max-width: 25rem) {
+    #cs-navigation .cs-logo img {
+      height: 2.5rem;
+    }
+    body.scroll #cs-navigation .cs-logo img {
+      height: 2rem;
+    }
   }
   
   #cs-navigation .cs-toggle {
@@ -436,8 +451,8 @@ header .cs-logo img{transition: all linear .3s}
 /*-- -------------------------- -->
 <---     Navigation Dropdown    -->
 <--- -------------------------- -*/
-/* Mobile - 1023px */
-@media only screen and (max-width: 63.9375rem) {
+/* Mobile - 1199px */
+@media only screen and (max-width: 74.9375rem) {
   #cs-navigation .cs-li {
     text-align: center;
     width: 100%;
@@ -494,9 +509,9 @@ header .cs-logo img{transition: all linear .3s}
     color: #fff;
   }
 }
-/* Desktop - 1024px */
-@media only screen and (min-width: 64rem) {
- 
+/* Desktop - 1200px */
+@media only screen and (min-width: 75rem) {
+
   #cs-navigation .cs-dropdown {
     position: relative;
   }
@@ -601,8 +616,8 @@ header .cs-logo img{transition: all linear .3s}
 /*-- -------------------------- -->
 <---     Desktop Navigation     -->
 <--- -------------------------- -*/
-/* Small Desktop - 1024px */
-@media only screen and (min-width: 64rem) {
+/* Small Desktop - 1200px */
+@media only screen and (min-width: 75rem) {
   body.scroll #cs-navigation {
     width: 100%;
     max-width: 100%;

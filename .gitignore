@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # TinaCMS generated
 tina/__generated__/
+
+# Claude Code local config
+.claude/settings.local.json
