@@ -6,7 +6,7 @@ import Footer from "../../components/Footer.astro";
 import RatingBadge from "../../components/RatingBadge.astro";
 
 export async function getStaticPaths() {
-  const reviews = await getCollection("reviews");
+  const reviews = (await getCollection("reviews")) ?? [];
   return reviews.map((review) => ({
     params: { slug: review.slug },
     props: review,
