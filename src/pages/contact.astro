@@ -9,13 +9,14 @@ import Footer from '../components/Footer.astro';
         <div class="page-wrap">
             <div class="container">
                 <div class="contact-form-container">
-                    <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+                    <form id="form" action="https://api.web3forms.com/submit" method="POST" class="contact-form">
                         <span class="form-header">Contact Us</span>
                         <input type="hidden" name="access_key" value="dca0b549-ebd3-469b-bdf3-fc816e6d3915">
                         <input type="text" name="name" class="input" placeholder="Your Name" />
                         <input type="email" name="email" class="input" placeholder="Your Email" />
                         <textarea name="message" cols="30" rows="5" placeholder="Enter your message" class="input" required></textarea>
                         <button class="submit" type="submit">Submit</button>
+                        <p id="result"></p>
                     </form>
                 </div>
             </div>
