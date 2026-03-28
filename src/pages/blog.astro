@@ -1,48 +1,164 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import BlogCard from "../components/BlogCard.astro";
 
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))].sort();
 ---
-<Layout title="Good Enough Gaming">	
-    <Nav />
-	 <body>
-		<div class="div-banner bg-[url('../GegBannerNoText.png')]">
-        
-            
+
+<Layout title="Blog — Good Enough Gaming">
+  <Nav />
+  <body>
+    <main>
+      <h1 class="page-title">Blog</h1>
+
+      {allTags.length > 0 && (
+        <div class="filters">
+          <button class="filter-pill active" data-tag="all">All</button>
+          {allTags.map((tag) => (
+            <button class="filter-pill" data-tag={tag}>{tag}</button>
+          ))}
         </div>
-		
-        <Footer />
-	</body>
-    
+      )}
+
+      <div class="posts-grid" id="posts-grid">
+        {posts.map((post) => (
+          <div class="post-item" data-tags={JSON.stringify(post.data.tags ?? [])}>
+            <BlogCard
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              author={post.data.author}
+              image={post.data.image}
+              tags={post.data.tags}
+              slug={post.slug}
+            />
+          </div>
+        ))}
+      </div>
+
+      <p class="no-results" id="no-results" style="display:none;">No posts found for this tag.</p>
+    </main>
+    <Footer />
+  </body>
 </Layout>
 
-
 <style>
-	body {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        //display: flex;
-        //min-height: 100vh;
-        //flex-direction: column;
-        //justify-content: space-between;
-		//background-image: url('GegBannerNoText.png');
-        //background-position: center; /* Center the image */
-        //background-repeat: no-repeat; /* Do not repeat the image */
-        //background-size: cover; /* Resize the background image to cover the entire container */
-        //align-items: center;
-	}
-
-	.div-banner {
-        background-position: center; /* Center the image */
-        background-repeat: no-repeat; /* Do not repeat the image */
-        background-size: cover; /* Resize the background image to cover the entire container */
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+  body {
+    min-height: 100vh;
+    background: #13151a;
+    display: flex;
+    flex-direction: column;
+  }
+  main {
+    flex: 1;
+    margin: 0 auto;
+    padding: 1rem;
+    max-width: 90rem;
+    width: 100%;
+    color: white;
+    margin-top: 8rem;
+    box-sizing: border-box;
+  }
+  .page-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #4ddbff;
+    margin-bottom: 1.5rem;
+  }
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+  }
+  .filter-pill {
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(167, 164, 224, 0.4);
+    background: transparent;
+    color: #a7a4e0;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .filter-pill:hover {
+    border-color: #4ddbff;
+    color: #4ddbff;
+  }
+  .filter-pill.active {
+    background: #4ddbff;
+    border-color: #4ddbff;
+    color: #13151a;
+    font-weight: 600;
+  }
+  .posts-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 90rem;
+  }
+  .post-item {
+    display: contents;
+  }
+  .post-item.hidden {
+    display: none;
+  }
+  .no-results {
+    text-align: center;
+    color: #a7a4e0;
+    margin-top: 3rem;
+    font-size: 1.1rem;
+  }
+  @media (min-width: 48rem) {
+    .posts-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
-	
+    .post-item {
+      display: block;
+    }
+    .post-item.hidden {
+      display: none;
+    }
+  }
+  @media (min-width: 64rem) {
+    .posts-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    main {
+      margin-top: 10rem;
+    }
+  }
 </style>
+
+<script>
+  const pills = document.querySelectorAll<HTMLButtonElement>(".filter-pill");
+  const items = document.querySelectorAll<HTMLElement>(".post-item");
+  const noResults = document.getElementById("no-results")!;
+
+  pills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      pills.forEach((p) => p.classList.remove("active"));
+      pill.classList.add("active");
+
+      const tag = pill.dataset.tag!;
+      let visible = 0;
+
+      items.forEach((item) => {
+        const tags: string[] = JSON.parse(item.dataset.tags || "[]");
+        const show = tag === "all" || tags.includes(tag);
+        item.classList.toggle("hidden", !show);
+        if (show) visible++;
+      });
+
+      noResults.style.display = visible === 0 ? "block" : "none";
+    });
+  });
+</script>

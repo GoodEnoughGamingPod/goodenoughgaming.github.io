@@ -28,15 +28,10 @@ import logo from '/public/logo_trans.png';
             <div class="cs-ul-wrapper">
                 <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
                     <li class="cs-li">
-                        <a href="/" class="cs-li-link">
-                            Home
-                        </a>
-                    </li>
-                    <!-- <li class="cs-li">
-                        <a href="" class="cs-li-link">
+                        <a href="/about/" class="cs-li-link">
                             About
                         </a>
-                    </li>-->
+                    </li>
                     <!--Copy and paste this cs-dropdown list item and replace any .cs-li with this cs-dropdown group to make a new dropdown and it will work-->
                     <li class="cs-li cs-dropdown" tabindex="0">
                         <span class="cs-li-link">
@@ -55,14 +50,33 @@ import logo from '/public/logo_trans.png';
                       </li>
                         </ul>
                     </li>
-                    <li class="cs-li">
-                        <a href="/blog/" class="cs-li-link">
-                            News and Reviews
-                        </a>
+                    <li class="cs-li cs-dropdown" tabindex="0">
+                        <span class="cs-li-link">
+                            Posts
+                            <img class="cs-drop-icon" src={arrow.src} alt="dropdown icon" width="15" height="15" decoding="async" aria-hidden="true">
+                        </span>
+                        <ul class="cs-drop-ul">
+                            <li class="cs-drop-li">
+                                <a href="/blog/" class="cs-li-link cs-drop-link">Blog</a>
+                            </li>
+                            <li class="cs-drop-li">
+                                <a href="/reviews/" class="cs-li-link cs-drop-link">Reviews</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="cs-li">
                         <a href="/contact/" class="cs-li-link">
                             Contact
+                        </a>
+                    </li>
+                    <li class="cs-li">
+                        <a href="https://good-enough-gaming-shop.fourthwall.com/" class="cs-li-link" target="_blank" rel="noopener">
+                            Merch
+                        </a>
+                    </li>
+                    <li class="cs-li">
+                        <a href="https://patreon.com/GoodEnoughGamingPodcast" class="cs-li-link" target="_blank" rel="noopener">
+                            Patreon
                         </a>
                     </li>
                 </ul>
@@ -70,17 +84,19 @@ import logo from '/public/logo_trans.png';
         </nav>
         <div class="cs-contact-group">           
             <div class="cs-social">
-                <a href="https://www.instagram.com/gegpodcast/" class="cs-social-link">
-                    <!-- <img class="cs-social-icon" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/facebook-1a.svg" alt="logo" width="12" height="12" aria-hidden="true" decoding="async"> -->
-                    <i class="cs-social-icon fa-brands fa-instagram fa-solid fa-lg fa"></i>
+                <a href="https://www.instagram.com/gegpodcast/" class="cs-social-link" aria-label="Instagram" target="_blank" rel="noopener">
+                    <i class="cs-social-icon fa-brands fa-instagram fa-lg fa"></i>
                 </a>
-                <a href="https://twitter.com/GEGPod" class="cs-social-link">
-                    <i class="cs-social-icon fa-brands fa-x-twitter fa-lg fa"></i>
+                <a href="https://www.tiktok.com/@goodenoughgamingpod" class="cs-social-link" aria-label="TikTok" target="_blank" rel="noopener">
+                    <i class="cs-social-icon fa-brands fa-tiktok fa-lg fa"></i>
                 </a>
-                <a href="https://discord.com/invite/VSqhVJhnJW" class="cs-social-link">                   
+                <a href="https://patreon.com/GoodEnoughGamingPodcast" class="cs-social-link" aria-label="Patreon" target="_blank" rel="noopener">
+                    <i class="cs-social-icon fa-brands fa-patreon fa-lg fa"></i>
+                </a>
+                <a href="https://discord.gg/PkNqmbCV" class="cs-social-link" aria-label="Discord" target="_blank" rel="noopener">
                     <i class="cs-social-icon fa-brands fa-discord fa-lg fa"></i>
                 </a>
-                <a href="https://www.youtube.com/@GoodEnoughGamingPod" class="cs-social-link">
+                <a href="https://www.youtube.com/@GoodEnoughGamingPod" class="cs-social-link" aria-label="YouTube" target="_blank" rel="noopener">
                     <i class="cs-social-icon fa-brands fa-youtube fa-lg fa"></i>
                 </a>
             </div>
@@ -95,8 +111,10 @@ import logo from '/public/logo_trans.png';
 
 <style>
   :root {
-    --headerColor: #514689;
-    --primary: #a7a4e0;
+    --headerColor: #e8e8f0;
+    --primary: #4ddbff;
+    --nav-bg: rgba(18, 20, 28, 0.92);
+    --nav-border: rgba(77, 219, 255, 0.25);
     font-family: VeniteFont;
   }
   @font-face {
@@ -110,8 +128,8 @@ header .cs-logo img{transition: all linear .3s}
     /*-- -------------------------- -->
 <---     Mobile Navigation      -->
 <--- -------------------------- -*/
-/* Mobile - 1023px */
-@media only screen and (max-width: 63.9375rem) {
+/* Mobile - 1199px */
+@media only screen and (max-width: 74.9375rem) {
   body.cs-open {
     overflow: hidden;
   }
@@ -148,8 +166,9 @@ header .cs-logo img{transition: all linear .3s}
     content: "";
     width: 100%;
     height: 100%;
-    background: #b2b4b2;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background: var(--nav-bg);
+    border: 1px solid var(--nav-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(77, 219, 255, 0.08);
     opacity: 1;
     /* 12px - 24px */
     border-radius: clamp(0.75rem, 2vw, 1.5rem);
@@ -159,6 +178,7 @@ header .cs-logo img{transition: all linear .3s}
     left: 50%;
     transform: translateX(-50%);
     transition: transform 0.2s, border-radius 0.3s ease-in-out;
+    backdrop-filter: blur(12px);
   }
   #cs-navigation.cs-active:before {
     transform: translateX(-50%) scale(1.03);
@@ -194,14 +214,24 @@ header .cs-logo img{transition: all linear .3s}
     justify-content: flex-start;
     align-items: center;
     z-index: 10;
+    flex-shrink: 0;
   }
   #cs-navigation .cs-logo img {
-    width: 100px;
-    height: 100px;
+    width: auto;
+    height: clamp(3.5rem, 25vw, 6.25rem);
+    object-fit: contain;
   }
   body.scroll #cs-navigation .cs-logo img {
-    width: 60px;
-    height: 60px;
+    width: auto;
+    height: clamp(2.5rem, 18vw, 3.75rem);
+  }
+  @media only screen and (max-width: 25rem) {
+    #cs-navigation .cs-logo img {
+      height: 2.5rem;
+    }
+    body.scroll #cs-navigation .cs-logo img {
+      height: 2rem;
+    }
   }
   
   #cs-navigation .cs-toggle {
@@ -239,13 +269,17 @@ header .cs-logo img{transition: all linear .3s}
     align-items: center;
     transition: opacity 0.3s, visibility 0.3s, height 0.3s;
   }
+  #cs-navigation .cs-social-link:last-child {
+    margin-left: 0.4rem;
+  }
 
   #cs-navigation .cs-social-icon {
     width: 0.75rem;
     height: auto;
-    opacity: 0.6;
+    opacity: 1;
+    color: #a7a4e0;
     display: flex;
-    transition: opacity 0.3s;
+    transition: color 0.3s, opacity 0.3s;
   }
 
   #cs-navigation .cs-social-link {
@@ -313,8 +347,10 @@ header .cs-logo img{transition: all linear .3s}
     width: 100%;
     height: auto;
     padding-bottom: 2.4em;
-    background-color: #b2b4b2;
+    background-color: rgba(18, 20, 28, 0.97);
     border-radius: 0 0 1.5rem 1.5rem;
+    border: 1px solid var(--nav-border);
+    border-top: none;
     position: absolute;
     top: 85%;
     left: 0;
@@ -415,8 +451,8 @@ header .cs-logo img{transition: all linear .3s}
 /*-- -------------------------- -->
 <---     Navigation Dropdown    -->
 <--- -------------------------- -*/
-/* Mobile - 1023px */
-@media only screen and (max-width: 63.9375rem) {
+/* Mobile - 1199px */
+@media only screen and (max-width: 74.9375rem) {
   #cs-navigation .cs-li {
     text-align: center;
     width: 100%;
@@ -453,7 +489,7 @@ header .cs-logo img{transition: all linear .3s}
     height: 0;
     margin: 0;
     padding: 0;
-    background-color: var(--primary);
+    background-color: rgba(77, 219, 255, 0.12);
     opacity: 0;
     display: flex;
     visibility: hidden;
@@ -473,9 +509,9 @@ header .cs-logo img{transition: all linear .3s}
     color: #fff;
   }
 }
-/* Desktop - 1024px */
-@media only screen and (min-width: 64rem) {
- 
+/* Desktop - 1200px */
+@media only screen and (min-width: 75rem) {
+
   #cs-navigation .cs-dropdown {
     position: relative;
   }
@@ -500,10 +536,12 @@ header .cs-logo img{transition: all linear .3s}
     min-width: 12.5rem;
     margin: 0;
     padding: 0;
-    background-color: #b2b4b2;
-    box-shadow: inset rgba(149, 157, 165, 0.1) 0px 8px 10px;
+    background-color: rgba(18, 20, 28, 0.97);
+    border: 1px solid var(--nav-border);
+    border-top: none;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
     opacity: 0;
-    border-bottom: 5px solid var(--primary);
+    border-bottom: 3px solid var(--primary);
     border-radius: 0 0 1.5rem 1.5rem;
     visibility: hidden;
     /* if you have 8 or more links in your dropdown nav, uncomment the columns property to make the list into 2 even columns. Change it to 3 or 4 if you need extra columns. Then remove the transition delays on the cs-drop-li so they don't have weird scattered animations */
@@ -563,12 +601,12 @@ header .cs-logo img{transition: all linear .3s}
     /* prevents padding from affecting height and width */
     box-sizing: border-box;
     padding: 0.75rem;
-    color: var(--headerColor);
+    color: #e8e8f0;
     display: block;
     transition: color 0.3s, background-color 0.3s;
   }
   #cs-navigation .cs-li-link.cs-drop-link:hover {
-    color: var(--bodyTextColorWhite);
+    color: #13151a;
     background-color: var(--primary);
   }
   #cs-navigation .cs-li-link.cs-drop-link:before {
@@ -578,8 +616,8 @@ header .cs-logo img{transition: all linear .3s}
 /*-- -------------------------- -->
 <---     Desktop Navigation     -->
 <--- -------------------------- -*/
-/* Small Desktop - 1024px */
-@media only screen and (min-width: 64rem) {
+/* Small Desktop - 1200px */
+@media only screen and (min-width: 75rem) {
   body.scroll #cs-navigation {
     width: 100%;
     max-width: 100%;
@@ -595,8 +633,10 @@ header .cs-logo img{transition: all linear .3s}
     box-sizing: border-box;
     /* 12px - 24px */
     padding: clamp(0.75rem, 2vw, 1.5rem) 0;
-    background-color: #b2b4b2;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background-color: var(--nav-bg);
+    border: 1px solid var(--nav-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
     /* 12px - 24px */
     border-radius: clamp(0.75rem, 2vw, 1.5rem);
     display: flex;
@@ -691,12 +731,13 @@ header .cs-logo img{transition: all linear .3s}
   }
   #cs-navigation .cs-social-link:hover .cs-social-icon {
     opacity: 1;
-    filter: grayscale(1) brightness(10000%);
+    color: #4ddbff;
   }
   #cs-navigation .cs-social-icon {
     width: 0.75rem;
     height: auto;
-    opacity: 0.6;
+    opacity: 1;
+    color: #a7a4e0;
     display: block;
     transition: opacity 0.3s;
   }

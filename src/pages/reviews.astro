@@ -1,0 +1,212 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import ReviewCard from "../components/ReviewCard.astro";
+
+const reviews = ((await getCollection("reviews")) ?? []).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const allPlatforms = [...new Set(reviews.flatMap((r) => r.data.platform ?? []))].sort();
+const allGenres = [...new Set(reviews.map((r) => r.data.genre).filter(Boolean))].sort();
+---
+
+<Layout title="Reviews — Good Enough Gaming">
+  <Nav />
+  <body>
+    <main>
+      <h1 class="page-title">Reviews</h1>
+
+      <div class="filters">
+        <div class="filter-group">
+          <span class="filter-label">Platform:</span>
+          <button class="filter-pill active" data-filter="platform" data-value="all">All</button>
+          {allPlatforms.map((p) => (
+            <button class="filter-pill" data-filter="platform" data-value={p}>{p}</button>
+          ))}
+        </div>
+        {allGenres.length > 1 && (
+          <div class="filter-group">
+            <span class="filter-label">Genre:</span>
+            <button class="filter-pill active" data-filter="genre" data-value="all">All</button>
+            {allGenres.map((g) => (
+              <button class="filter-pill" data-filter="genre" data-value={g}>{g}</button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div class="reviews-grid" id="reviews-grid">
+        {reviews.map((review) => (
+          <div
+            class="review-item"
+            data-platforms={JSON.stringify(review.data.platform ?? [])}
+            data-genre={review.data.genre ?? ""}
+          >
+            <ReviewCard
+              title={review.data.title}
+              description={review.data.description}
+              pubDate={review.data.pubDate}
+              author={review.data.author}
+              image={review.data.image}
+              rating={review.data.rating}
+              platform={review.data.platform}
+              genre={review.data.genre}
+              slug={review.slug}
+            />
+          </div>
+        ))}
+      </div>
+
+      <p class="no-results" id="no-results" style="display:none;">No reviews match the selected filters.</p>
+    </main>
+    <Footer />
+  </body>
+</Layout>
+
+<style>
+  body {
+    min-height: 100vh;
+    background: #13151a;
+    display: flex;
+    flex-direction: column;
+  }
+  main {
+    flex: 1;
+    margin: 0 auto;
+    padding: 1rem;
+    max-width: 90rem;
+    width: 100%;
+    color: white;
+    margin-top: 8rem;
+    box-sizing: border-box;
+  }
+  .page-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #4ddbff;
+    margin-bottom: 1.5rem;
+  }
+  .filters {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    align-items: center;
+  }
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+  }
+  .filter-label {
+    font-size: 0.85rem;
+    color: #a7a4e0;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.25rem;
+  }
+  .filter-pill {
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(167, 164, 224, 0.4);
+    background: transparent;
+    color: #a7a4e0;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .filter-pill:hover {
+    border-color: #4ddbff;
+    color: #4ddbff;
+  }
+  .filter-pill.active {
+    background: #4ddbff;
+    border-color: #4ddbff;
+    color: #13151a;
+    font-weight: 600;
+  }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 90rem;
+  }
+  .review-item {
+    display: contents;
+  }
+  .review-item.hidden {
+    display: none;
+  }
+  .no-results {
+    text-align: center;
+    color: #a7a4e0;
+    margin-top: 3rem;
+    font-size: 1.1rem;
+  }
+  @media (min-width: 48rem) {
+    .reviews-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .review-item {
+      display: block;
+    }
+    .review-item.hidden {
+      display: none;
+    }
+  }
+  @media (min-width: 64rem) {
+    .reviews-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    main {
+      margin-top: 10rem;
+    }
+  }
+</style>
+
+<script>
+  type FilterState = { platform: string; genre: string };
+  const state: FilterState = { platform: "all", genre: "all" };
+
+  const pills = document.querySelectorAll<HTMLButtonElement>(".filter-pill");
+  const items = document.querySelectorAll<HTMLElement>(".review-item");
+  const noResults = document.getElementById("no-results")!;
+
+  function applyFilters() {
+    let visible = 0;
+    items.forEach((item) => {
+      const platforms: string[] = JSON.parse(item.dataset.platforms || "[]");
+      const genre = item.dataset.genre || "";
+
+      const platformMatch = state.platform === "all" || platforms.includes(state.platform);
+      const genreMatch = state.genre === "all" || genre === state.genre;
+
+      const show = platformMatch && genreMatch;
+      item.classList.toggle("hidden", !show);
+      if (show) visible++;
+    });
+    noResults.style.display = visible === 0 ? "block" : "none";
+  }
+
+  pills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      const filter = pill.dataset.filter as keyof FilterState;
+      const value = pill.dataset.value!;
+
+      // Update active state within this group
+      document
+        .querySelectorAll<HTMLButtonElement>(`.filter-pill[data-filter="${filter}"]`)
+        .forEach((p) => p.classList.remove("active"));
+      pill.classList.add("active");
+
+      state[filter] = value;
+      applyFilters();
+    });
+  });
+</script>

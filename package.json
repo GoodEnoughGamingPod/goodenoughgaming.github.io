@@ -3,18 +3,18 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev --host",
+    "dev": "tinacms dev -c \"astro dev --host\"",
     "start": "astro dev",
     "build": "astro build",
+    "build:cms": "tinacms build && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.1.0",
+    "@tinacms/cli": "^1.6.8",
     "astro": "^4.1.1",
-    "astro-navbar": "^2.3.0",
-    "axios": "^1.7.2",
-    "ngrok": "^5.0.0-beta.2"
+    "tinacms": "^2.2.8"
   },
   "description": "```sh npm create astro@latest -- --template basics ```",
   "main": "index.js",
