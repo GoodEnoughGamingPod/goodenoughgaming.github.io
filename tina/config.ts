@@ -3,6 +3,8 @@ import { defineConfig } from "tinacms";
 export default defineConfig({
   branch:
     process.env.GITHUB_BRANCH ||
+    process.env.GITHUB_REF_NAME ||
+    process.env.GITHUB_HEAD_REF ||
     process.env.VERCEL_GIT_COMMIT_REF ||
     process.env.HEAD ||
     "main",
