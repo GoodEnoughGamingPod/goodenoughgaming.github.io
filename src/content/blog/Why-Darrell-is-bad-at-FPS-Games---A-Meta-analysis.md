@@ -36,7 +36,7 @@ Experts believe this is due to a subconscious desire to not inconvenience oppone
 
 **2. Red Hood Tattoo Encumbrance Coefficient (RHTEC)**
 
-Now we arrive at perhaps the most controversial—and most rigorously unproven—factor in Darrell’s FPS performance: Red Hood Tattoo Encumbrance.
+Now the most controversial—and most rigorously unproven—factor in Darrell’s FPS performance: Red Hood Tattoo Encumbrance.
 
 For context, Darrell has committed to the aesthetic of Red Hood with a level of dedication usually reserved for method actors and midlife crises. This includes multiple tattoos, each theoretically adding +10 intimidation but, as emerging data suggests, -15 to headshot accuracy.
 
@@ -88,7 +88,7 @@ His teammate
 
 The general morale of the squad
 
-5**. Aim Calibration via Vibes (ACVV)**
+**5. Aim Calibration via Vibes (ACVV)**
 
 Most players practice aim through training maps or drills.
 
